@@ -28,54 +28,6 @@ dir.create("data/geodata")
 
 #' here i prepare the data from mammals data papers. these data are not available
 
-## atlantic bats ----
-
-# download data
-download.file(url = "https://github.com/LEEClab/Atlantic_series/blob/master/ATLANTIC_BATS/DATASET/2018_02_d21/ATLANTIC_BATS_2020_comp.xlsx?raw=true",
-              destfile = "data/data_papers/ATLANTIC_BATS_2019_comp.xlsx", mode = "wb")
-
-# download data
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2007&file=ecy2007-sup-0002-DataS1.zip",
-              destfile = "data/data_papers/ecy2007-sup-0002-DataS1.zip", mode = "wb")
-
-# unzip(zipfile = "data/data_papers/ecy2007-sup-0002-DataS1.zip", exdir = "data/data_papers")
-
-# import data
-# ba_tax <- readr::read_delim("data/ATLANTIC_BATS_Capture.csv", delim = ",", quote = "") # correcoes nas linhas
-
-ba_tax <- readr::read_csv("data/data_papers/ATLANTIC_BATS_Capture.csv") %>% 
-    dplyr::mutate(species = str_replace(Species, "[.]", " ")) %>% 
-    dplyr::mutate(species = str_replace(species, "cf..", "cf. ")) %>% 
-    dplyr::select(species, Order, Family) %>% 
-    dplyr::rename_with(tolower) %>% 
-    dplyr::mutate(genus = str_split(species, " ", simplify = TRUE)[, 1], .before = species) %>% 
-    dplyr::relocate(order:family, .before = 1) %>% 
-    dplyr::distinct()
-ba_tax
-
-ba_occ <- readxl::read_xlsx("data/data_papers/ATLANTIC_BATS_2019_comp.xlsx") %>% 
-    dplyr::select(1, 6, 7, 22, Anoura.caudifer:Micronycteris.sp.) %>% 
-    dplyr::rename(id = ID...1) %>% 
-    tidyr::pivot_longer(cols = Anoura.caudifer:Micronycteris.sp.,
-                        names_to = "name",
-                        values_to = "abundance") %>% 
-    dplyr::filter(abundance > 0) %>% 
-    dplyr::mutate(species = str_replace(name, "[.]", " "),
-                  longitude = as.numeric(sub(",", ".", Longitude)),
-                  latitude = as.numeric(sub(",", ".", Latitude)),
-                  year = as.numeric(Year_finish),
-                  source = "atlantic_bats") %>%
-    dplyr::select(species, longitude, latitude, year, source) %>% 
-    dplyr::mutate(species = str_replace(species, "cf..", "cf. ")) %>% 
-    dplyr::mutate(species = str_trim(species)) %>% 
-    dplyr::left_join(ba_tax, .) %>% 
-    dplyr::relocate(order:family, .before = 1) %>% 
-    tibble::rowid_to_column()
-ba_occ
-
-# export data
-readr::write_csv(ba_occ, "data/atlantic_bats.csv")
-
 ## atlantic camtrap ----
 
 # download data
@@ -150,6 +102,7 @@ lm_occ <- readr::read_csv("data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblag
     dplyr::relocate(order:family, .before = 2)
 lm_occ
 
+problems()
 # export data
 readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
 
