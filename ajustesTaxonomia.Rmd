@@ -24,27 +24,42 @@ mamiferos =
            encoding = "UTF-8"
   )
 
-unique(sort(mamiferos$species))
+unique(sort(ca_occ$family))
 ```
+
+SELEÇÃO DE GATÍNEOS
+
+```{r}
+mamiferos <- ca_occ
+mamiferos <- mamiferos %>%
+  dplyr::filter(
+    family == "Felidae"
+      
+    )
+  
+
+
+```
+
+
+
+SELEÇÃO DE GATÍNEOS
 
 Exclusão de registros nada a ver.
 ```{r}
 mamiferos <- mamiferos[!grepl("sp.", mamiferos$species),]
-mamiferos <- mamiferos[!grepl("Monodelphis americana/scalops", mamiferos$species),]
-mamiferos <- mamiferos[!grepl("Callithrix jacchus X Callithrix aurita", mamiferos$species),]
-mamiferos <- mamiferos[!grepl("Callithrix jacchus X Callithrix penicillata", mamiferos$species),]
-mamiferos <- mamiferos[!grepl("Callithrix penicillata x Callithrix aurita", mamiferos$species),]
-mamiferos <- mamiferos[!grepl("Unidentified rodent", mamiferos$species),]
-mamiferos <- mamiferos[!grepl("Dasyprocta iacki", mamiferos$species),]
+
+sort(unique(mamiferos$species))
+
+mamiferos <- mamiferos[!grepl("Panthera onca", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Puma concolor", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Felis catus", mamiferos$species),]
 ```
 
 Correção de taxonomia
 ```{r}
 mamiferos$species <- gsub("Puma yagouaroundi","Herpailurus yagouaroundi",
-                     gsub("marmosops paulensis","Marmosops paulensis",
-                     gsub("Dasypus septemcinctus septemcinctus","Dasypus septemcinctus",
-                     gsub("Leopardus tigrinus","Leopardus guttulus",
-                                         mamiferos$species))))
+                          mamiferos$species)
 
 mamiferos$family <- gsub("Felídeos","Felidae", mamiferos$family)
 ```
@@ -65,6 +80,7 @@ mamiferos <- mamiferos[!grepl("Sus scrofa", mamiferos$species),]
 
 Pegar o gênero
 ```{r}
+sort(unique(mamiferos$genus))
 mamiferos$genus <- word(mamiferos$species,1)
 ```
 
