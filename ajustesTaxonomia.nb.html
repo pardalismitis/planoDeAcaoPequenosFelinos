@@ -1773,55 +1773,92 @@ Dados brutos integrados por Maurício Vancine.</p>
 <p>Dados de entrada e saída desse script disponíveis no <a href="https://github.com/pardalismitis/mamiferosDeSaoPaulo">Github</a>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm0obGlzdCA9IGxzKGFsbCA9IFRSVUUpKVxubGlicmFyeShoZXJlKVxubGlicmFyeShzdHJpbmdyKVxubGlicmFyeShkYnBseXIpXG5gYGAifQ== -->
-<pre class="r"><code>rm(list = ls(all = TRUE))
-library(here)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucm0obGlzdCA9IGxzKGFsbCA9IFRSVUUpKVxubGlicmFyeShoZXJlKVxuYGBgXG5gYGAifQ== -->
+<pre class="r"><code>```r
+rm(list = ls(all = TRUE))
+library(here)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiaGVyZSgpIHN0YXJ0cyBhdCBEOi9naXQvbWFtaWZlcm9zRGVTYW9QYXVsb1xuIn0= --&gt;
+</code></pre>
+<p>here() starts at D:/git/mamiferosDeSaoPaulo</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShzdHJpbmdyKVxubGlicmFyeShkYnBseXIpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
 library(stringr)
 library(dbplyr)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxuIn0= --&gt;
+</code></pre>
+<p>Registered S3 methods overwritten by ‘dbplyr’: method from
+print.tbl_lazy<br />
+print.tbl_sql</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+Leitura e checagem
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudW5pcXVlKHNvcnQoY2Ffb2NjJGZhbWlseSkpXG5cbmBgYCJ9 --&gt;
+
+```r
+unique(sort(ca_occ$family))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkF0ZWxpZGFlXCIgICAgICAgIFwiQm92aWRhZVwiICAgICAgICAgXCJCcmFkeXBvZGlkYWVcIiAgICBcIkNhbGxpdHJpY2hpZGFlXCIgIFwiQ2FuaWRhZVwiICAgICAgICBcbiBbNl0gXCJDYXZpaWRhZVwiICAgICAgICBcIkNlYmlkYWVcIiAgICAgICAgIFwiQ2VydmlkYWVcIiAgICAgICAgXCJDcmljZXRpZGFlXCIgICAgICBcIkN1bmljdWxpZGFlXCIgICAgXG5bMTFdIFwiRGFzeXBvZGlkYWVcIiAgICAgXCJEYXN5cHJvY3RpZGFlXCIgICBcIkRpZGVscGhpZGFlXCIgICAgIFwiRWNoaW15aWRhZVwiICAgICAgXCJFcmV0aGl6b250aWRhZVwiIFxuWzE2XSBcIkZlbGlkYWVcIiAgICAgICAgIFwiTGVwb3JpZGFlXCIgICAgICAgXCJNZXBoaXRpZGFlXCIgICAgICBcIk11c3RlbGlkYWVcIiAgICAgIFwiTXlvY2FzdG9yaWRhZVwiICBcblsyMV0gXCJNeXJtZWNvcGhhZ2lkYWVcIiBcIlBoeWxsb3N0b21pZGFlXCIgIFwiUGl0aGVjaWlkYWVcIiAgICAgXCJQcm9jeW9uaWRhZVwiICAgICBcIlNjaXVyaWRhZVwiICAgICAgXG5bMjZdIFwiU3VpZGFlXCIgICAgICAgICAgXCJUYXBpcmlkYWVcIiAgICAgICBcIlRheWFzc3VpZGFlXCIgICAgXG4ifQ== -->
+<pre><code> [1] &quot;Atelidae&quot;        &quot;Bovidae&quot;         &quot;Bradypodidae&quot;    &quot;Callitrichidae&quot;  &quot;Canidae&quot;        
+ [6] &quot;Caviidae&quot;        &quot;Cebidae&quot;         &quot;Cervidae&quot;        &quot;Cricetidae&quot;      &quot;Cuniculidae&quot;    
+[11] &quot;Dasypodidae&quot;     &quot;Dasyproctidae&quot;   &quot;Didelphidae&quot;     &quot;Echimyidae&quot;      &quot;Erethizontidae&quot; 
+[16] &quot;Felidae&quot;         &quot;Leporidae&quot;       &quot;Mephitidae&quot;      &quot;Mustelidae&quot;      &quot;Myocastoridae&quot;  
+[21] &quot;Myrmecophagidae&quot; &quot;Phyllostomidae&quot;  &quot;Pitheciidae&quot;     &quot;Procyonidae&quot;     &quot;Sciuridae&quot;      
+[26] &quot;Suidae&quot;          &quot;Tapiridae&quot;       &quot;Tayassuidae&quot;    </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Leitura e checagem</p>
+<p>SELEÇÃO DE GATÍNEOS</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFtaWZlcm9zID0gXG4gIHJlYWQuY3N2KFwib2NjX3Zfc3AuY3N2XCIsXG4gICAgICAgICAgICNzZXAgPSBcIjtcIixcbiAgICAgICAgICAgbmEuc3RyaW5ncyA9IGMoXCJcIiwgXCJOQVwiKSxcbiAgICAgICAgICAgZW5jb2RpbmcgPSBcIlVURi04XCJcbiAgKVxuXG51bmlxdWUoc29ydChtYW1pZmVyb3Mkc3BlY2llcykpXG5gYGAifQ== -->
-<pre class="r"><code>mamiferos = 
-  read.csv(&quot;occ_v_sp.csv&quot;,
-           #sep = &quot;;&quot;,
-           na.strings = c(&quot;&quot;, &quot;NA&quot;),
-           encoding = &quot;UTF-8&quot;
-  )
-
-unique(sort(mamiferos$species))</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>SELEÇÃO DE GATÍNEOS</p>
 <p>Exclusão de registros nada a ver.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoXCJzcC5cIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF1cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwiTW9ub2RlbHBoaXMgYW1lcmljYW5hL3NjYWxvcHNcIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF1cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwiQ2FsbGl0aHJpeCBqYWNjaHVzIFggQ2FsbGl0aHJpeCBhdXJpdGFcIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF1cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwiQ2FsbGl0aHJpeCBqYWNjaHVzIFggQ2FsbGl0aHJpeCBwZW5pY2lsbGF0YVwiLCBtYW1pZmVyb3Mkc3BlY2llcyksXVxubWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoXCJDYWxsaXRocml4IHBlbmljaWxsYXRhIHggQ2FsbGl0aHJpeCBhdXJpdGFcIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF1cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwiVW5pZGVudGlmaWVkIHJvZGVudFwiLCBtYW1pZmVyb3Mkc3BlY2llcyksXVxubWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoXCJEYXN5cHJvY3RhIGlhY2tpXCIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdXG5gYGAifQ== -->
-<pre class="r"><code>mamiferos &lt;- mamiferos[!grepl(&quot;sp.&quot;, mamiferos$species),]
-mamiferos &lt;- mamiferos[!grepl(&quot;Monodelphis americana/scalops&quot;, mamiferos$species),]
-mamiferos &lt;- mamiferos[!grepl(&quot;Callithrix jacchus X Callithrix aurita&quot;, mamiferos$species),]
-mamiferos &lt;- mamiferos[!grepl(&quot;Callithrix jacchus X Callithrix penicillata&quot;, mamiferos$species),]
-mamiferos &lt;- mamiferos[!grepl(&quot;Callithrix penicillata x Callithrix aurita&quot;, mamiferos$species),]
-mamiferos &lt;- mamiferos[!grepl(&quot;Unidentified rodent&quot;, mamiferos$species),]
-mamiferos &lt;- mamiferos[!grepl(&quot;Dasyprocta iacki&quot;, mamiferos$species),]</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29ydCh1bmlxdWUobWFtaWZlcm9zJHNwZWNpZXMpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>sort(unique(mamiferos$species))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSGVycGFpbHVydXMgeWFnb3Vhcm91bmRpXCIgXCJMZW9wYXJkdXMgZ3V0dHVsdXNcIiAgICAgICBcIkxlb3BhcmR1cyBwYXJkYWxpc1wiICAgICAgXG5bNF0gXCJMZW9wYXJkdXMgd2llZGlpXCIgICAgICAgIFxuIn0= -->
+<pre><code>[1] &quot;Herpailurus yagouaroundi&quot; &quot;Leopardus guttulus&quot;       &quot;Leopardus pardalis&quot;      
+[4] &quot;Leopardus wiedii&quot;        </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Correção de taxonomia</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFtaWZlcm9zJHNwZWNpZXMgPC0gZ3N1YihcIlB1bWEgeWFnb3Vhcm91bmRpXCIsXCJIZXJwYWlsdXJ1cyB5YWdvdWFyb3VuZGlcIixcbiAgICAgICAgICAgICAgICAgICAgIGdzdWIoXCJtYXJtb3NvcHMgcGF1bGVuc2lzXCIsXCJNYXJtb3NvcHMgcGF1bGVuc2lzXCIsXG4gICAgICAgICAgICAgICAgICAgICBnc3ViKFwiRGFzeXB1cyBzZXB0ZW1jaW5jdHVzIHNlcHRlbWNpbmN0dXNcIixcIkRhc3lwdXMgc2VwdGVtY2luY3R1c1wiLFxuICAgICAgICAgICAgICAgICAgICAgZ3N1YihcIkxlb3BhcmR1cyB0aWdyaW51c1wiLFwiTGVvcGFyZHVzIGd1dHR1bHVzXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1hbWlmZXJvcyRzcGVjaWVzKSkpKVxuXG5tYW1pZmVyb3MkZmFtaWx5IDwtIGdzdWIoXCJGZWzDrWRlb3NcIixcIkZlbGlkYWVcIiwgbWFtaWZlcm9zJGZhbWlseSlcbmBgYCJ9 -->
-<pre class="r"><code>mamiferos$species &lt;- gsub(&quot;Puma yagouaroundi&quot;,&quot;Herpailurus yagouaroundi&quot;,
-                     gsub(&quot;marmosops paulensis&quot;,&quot;Marmosops paulensis&quot;,
-                     gsub(&quot;Dasypus septemcinctus septemcinctus&quot;,&quot;Dasypus septemcinctus&quot;,
-                     gsub(&quot;Leopardus tigrinus&quot;,&quot;Leopardus guttulus&quot;,
-                                         mamiferos$species))))
-
-mamiferos$family &lt;- gsub(&quot;Felídeos&quot;,&quot;Felidae&quot;, mamiferos$family)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Remover exóticas/invasoras/domésticas</p>
@@ -1844,23 +1881,25 @@ mamiferos &lt;- mamiferos[!grepl(&quot;Sus scrofa&quot;, mamiferos$species),]</c
 <p>Pegar o gênero</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFtaWZlcm9zJGdlbnVzIDwtIHdvcmQobWFtaWZlcm9zJHNwZWNpZXMsMSlcbmBgYCJ9 -->
-<pre class="r"><code>mamiferos$genus &lt;- word(mamiferos$species,1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29ydCh1bmlxdWUobWFtaWZlcm9zJGdlbnVzKSlcblxuYGBgIn0= -->
+<pre class="r"><code>sort(unique(mamiferos$genus))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSGVycGFpbHVydXNcIiBcIkxlb3BhcmR1c1wiICBcbiJ9 -->
+<pre><code>[1] &quot;Herpailurus&quot; &quot;Leopardus&quot;  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Checagem</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudW5pcXVlKHNvcnQobWFtaWZlcm9zJHNwZWNpZXMpKVxuXG51bmlxdWUoc29ydChtYW1pZmVyb3MkZ2VudXMpKVxuXG51bmlxdWUoc29ydChtYW1pZmVyb3MkZmFtaWx5KSlcblxudW5pcXVlKHNvcnQobWFtaWZlcm9zJG9yZGVyKSlcbmBgYCJ9 -->
-<pre class="r"><code>unique(sort(mamiferos$species))
-
-unique(sort(mamiferos$genus))
-
-unique(sort(mamiferos$family))
-
-unique(sort(mamiferos$order))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudW5pcXVlKHNvcnQobWFtaWZlcm9zJG9yZGVyKSlcblxuYGBgIn0= -->
+<pre class="r"><code>unique(sort(mamiferos$order))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQ2Fybml2b3JhXCJcbiJ9 -->
+<pre><code>[1] &quot;Carnivora&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Exportar arquivo</p>
@@ -1873,7 +1912,7 @@ unique(sort(mamiferos$order))</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hbcOtZmVyb3MgZGUgU8OjbyBQYXVsbyINCmF1dGhvcjogIkZlcm5hbmRvIExpbWEsIEQuU2MuIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KTGltcGV6YSBkZSBkYWRvcyBwYXJhIGxpc3RhIGRlIGVzcMOpY2llcyBkZSBtYW3DrWZlcm9zIHRlcnJlc3RyZXMuIERhZG9zIGJydXRvcyBpbnRlZ3JhZG9zIHBvciBNYXVyw61jaW8gVmFuY2luZS4NCg0KRGFkb3MgZGUgZW50cmFkYSBlIHNhw61kYSBkZXNzZSBzY3JpcHQgZGlzcG9uw612ZWlzIG5vIFtHaXRodWJdKGh0dHBzOi8vZ2l0aHViLmNvbS9wYXJkYWxpc21pdGlzL21hbWlmZXJvc0RlU2FvUGF1bG8pLg0KDQpgYGB7cn0NCnJtKGxpc3QgPSBscyhhbGwgPSBUUlVFKSkNCmxpYnJhcnkoaGVyZSkNCmxpYnJhcnkoc3RyaW5ncikNCmxpYnJhcnkoZGJwbHlyKQ0KYGBgDQoNCkxlaXR1cmEgZSBjaGVjYWdlbQ0KYGBge3J9DQptYW1pZmVyb3MgPSANCiAgcmVhZC5jc3YoIm9jY192X3NwLmNzdiIsDQogICAgICAgICAgICNzZXAgPSAiOyIsDQogICAgICAgICAgIG5hLnN0cmluZ3MgPSBjKCIiLCAiTkEiKSwNCiAgICAgICAgICAgZW5jb2RpbmcgPSAiVVRGLTgiDQogICkNCg0KdW5pcXVlKHNvcnQobWFtaWZlcm9zJHNwZWNpZXMpKQ0KYGBgDQoNCkV4Y2x1c8OjbyBkZSByZWdpc3Ryb3MgbmFkYSBhIHZlci4NCmBgYHtyfQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoInNwLiIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiTW9ub2RlbHBoaXMgYW1lcmljYW5hL3NjYWxvcHMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkNhbGxpdGhyaXggamFjY2h1cyBYIENhbGxpdGhyaXggYXVyaXRhIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJDYWxsaXRocml4IGphY2NodXMgWCBDYWxsaXRocml4IHBlbmljaWxsYXRhIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJDYWxsaXRocml4IHBlbmljaWxsYXRhIHggQ2FsbGl0aHJpeCBhdXJpdGEiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIlVuaWRlbnRpZmllZCByb2RlbnQiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkRhc3lwcm9jdGEgaWFja2kiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KYGBgDQoNCkNvcnJlw6fDo28gZGUgdGF4b25vbWlhDQpgYGB7cn0NCm1hbWlmZXJvcyRzcGVjaWVzIDwtIGdzdWIoIlB1bWEgeWFnb3Vhcm91bmRpIiwiSGVycGFpbHVydXMgeWFnb3Vhcm91bmRpIiwNCiAgICAgICAgICAgICAgICAgICAgIGdzdWIoIm1hcm1vc29wcyBwYXVsZW5zaXMiLCJNYXJtb3NvcHMgcGF1bGVuc2lzIiwNCiAgICAgICAgICAgICAgICAgICAgIGdzdWIoIkRhc3lwdXMgc2VwdGVtY2luY3R1cyBzZXB0ZW1jaW5jdHVzIiwiRGFzeXB1cyBzZXB0ZW1jaW5jdHVzIiwNCiAgICAgICAgICAgICAgICAgICAgIGdzdWIoIkxlb3BhcmR1cyB0aWdyaW51cyIsIkxlb3BhcmR1cyBndXR0dWx1cyIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1hbWlmZXJvcyRzcGVjaWVzKSkpKQ0KDQptYW1pZmVyb3MkZmFtaWx5IDwtIGdzdWIoIkZlbMOtZGVvcyIsIkZlbGlkYWUiLCBtYW1pZmVyb3MkZmFtaWx5KQ0KYGBgDQoNClJlbW92ZXIgZXjDs3RpY2FzL2ludmFzb3Jhcy9kb23DqXN0aWNhcw0KYGBge3J9DQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiQm9zIHRhdXJ1cyIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiQ2FsbGl0aHJpeCBqYWNjaHVzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJDYWxsaXRocml4IHBlbmljaWxsYXRhIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJDYW5pcyBmYW1pbGlhcmlzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJGZWxpcyBjYXR1cyIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiTGVwdXMgY2FwZW5zaXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkxlcHVzIGV1cm9wYWV1cyIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiUmF0dHVzIG5vcnZlZ2ljdXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIlJhdHR1cyByYXR0dXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIlN1cyBzY3JvZmEiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KYGBgDQoNClBlZ2FyIG8gZ8OqbmVybw0KYGBge3J9DQptYW1pZmVyb3MkZ2VudXMgPC0gd29yZChtYW1pZmVyb3Mkc3BlY2llcywxKQ0KYGBgDQoNCkNoZWNhZ2VtDQpgYGB7cn0NCnVuaXF1ZShzb3J0KG1hbWlmZXJvcyRzcGVjaWVzKSkNCg0KdW5pcXVlKHNvcnQobWFtaWZlcm9zJGdlbnVzKSkNCg0KdW5pcXVlKHNvcnQobWFtaWZlcm9zJGZhbWlseSkpDQoNCnVuaXF1ZShzb3J0KG1hbWlmZXJvcyRvcmRlcikpDQpgYGANCg0KRXhwb3J0YXIgYXJxdWl2bw0KYGBge3J9DQp3cml0ZS5jc3YobWFtaWZlcm9zLCAib2NjX3Zfc3AuY3N2IikNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hbcOtZmVyb3MgZGUgU8OjbyBQYXVsbyINCmF1dGhvcjogIkZlcm5hbmRvIExpbWEsIEQuU2MuIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KTGltcGV6YSBkZSBkYWRvcyBwYXJhIGxpc3RhIGRlIGVzcMOpY2llcyBkZSBtYW3DrWZlcm9zIHRlcnJlc3RyZXMuIERhZG9zIGJydXRvcyBpbnRlZ3JhZG9zIHBvciBNYXVyw61jaW8gVmFuY2luZS4NCg0KRGFkb3MgZGUgZW50cmFkYSBlIHNhw61kYSBkZXNzZSBzY3JpcHQgZGlzcG9uw612ZWlzIG5vIFtHaXRodWJdKGh0dHBzOi8vZ2l0aHViLmNvbS9wYXJkYWxpc21pdGlzL21hbWlmZXJvc0RlU2FvUGF1bG8pLg0KDQpgYGB7cn0NCnJtKGxpc3QgPSBscyhhbGwgPSBUUlVFKSkNCmxpYnJhcnkoaGVyZSkNCmxpYnJhcnkoc3RyaW5ncikNCmxpYnJhcnkoZGJwbHlyKQ0KYGBgDQoNCkxlaXR1cmEgZSBjaGVjYWdlbQ0KYGBge3J9DQptYW1pZmVyb3MgPSANCiAgcmVhZC5jc3YoIm9jY192X3NwLmNzdiIsDQogICAgICAgICAgICNzZXAgPSAiOyIsDQogICAgICAgICAgIG5hLnN0cmluZ3MgPSBjKCIiLCAiTkEiKSwNCiAgICAgICAgICAgZW5jb2RpbmcgPSAiVVRGLTgiDQogICkNCg0KdW5pcXVlKHNvcnQoY2Ffb2NjJGZhbWlseSkpDQpgYGANCg0KU0VMRcOHw4NPIERFIEdBVMONTkVPUw0KDQpgYGB7cn0NCm1hbWlmZXJvcyA8LSBjYV9vY2MNCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3MgJT4lDQogIGRwbHlyOjpmaWx0ZXIoDQogICAgZmFtaWx5ID09ICJGZWxpZGFlIg0KICAgICAgDQogICAgKQ0KICANCg0KDQpgYGANCg0KDQoNClNFTEXDh8ODTyBERSBHQVTDjU5FT1MNCg0KRXhjbHVzw6NvIGRlIHJlZ2lzdHJvcyBuYWRhIGEgdmVyLg0KYGBge3J9DQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgic3AuIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCg0Kc29ydCh1bmlxdWUobWFtaWZlcm9zJHNwZWNpZXMpKQ0KDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiUGFudGhlcmEgb25jYSIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiUHVtYSBjb25jb2xvciIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiRmVsaXMgY2F0dXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KYGBgDQoNCkNvcnJlw6fDo28gZGUgdGF4b25vbWlhDQpgYGB7cn0NCm1hbWlmZXJvcyRzcGVjaWVzIDwtIGdzdWIoIlB1bWEgeWFnb3Vhcm91bmRpIiwiSGVycGFpbHVydXMgeWFnb3Vhcm91bmRpIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgbWFtaWZlcm9zJHNwZWNpZXMpDQoNCm1hbWlmZXJvcyRmYW1pbHkgPC0gZ3N1YigiRmVsw61kZW9zIiwiRmVsaWRhZSIsIG1hbWlmZXJvcyRmYW1pbHkpDQpgYGANCg0KUmVtb3ZlciBleMOzdGljYXMvaW52YXNvcmFzL2RvbcOpc3RpY2FzDQpgYGB7cn0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJCb3MgdGF1cnVzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJDYWxsaXRocml4IGphY2NodXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkNhbGxpdGhyaXggcGVuaWNpbGxhdGEiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkNhbmlzIGZhbWlsaWFyaXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkZlbGlzIGNhdHVzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJMZXB1cyBjYXBlbnNpcyIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiTGVwdXMgZXVyb3BhZXVzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJSYXR0dXMgbm9ydmVnaWN1cyIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiUmF0dHVzIHJhdHR1cyIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiU3VzIHNjcm9mYSIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQpgYGANCg0KUGVnYXIgbyBnw6puZXJvDQpgYGB7cn0NCnNvcnQodW5pcXVlKG1hbWlmZXJvcyRnZW51cykpDQptYW1pZmVyb3MkZ2VudXMgPC0gd29yZChtYW1pZmVyb3Mkc3BlY2llcywxKQ0KYGBgDQoNCkNoZWNhZ2VtDQpgYGB7cn0NCnVuaXF1ZShzb3J0KG1hbWlmZXJvcyRzcGVjaWVzKSkNCg0KdW5pcXVlKHNvcnQobWFtaWZlcm9zJGdlbnVzKSkNCg0KdW5pcXVlKHNvcnQobWFtaWZlcm9zJGZhbWlseSkpDQoNCnVuaXF1ZShzb3J0KG1hbWlmZXJvcyRvcmRlcikpDQpgYGANCg0KRXhwb3J0YXIgYXJxdWl2bw0KYGBge3J9DQp3cml0ZS5jc3YobWFtaWZlcm9zLCAib2NjX3Zfc3AuY3N2IikNCmBgYA0KDQo=</div>
 
 
 
