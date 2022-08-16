@@ -27,7 +27,6 @@ dir.create("data/geodata")
 # prepare data papers ------------------------------------------------------------
 
 #' here i prepare the data from mammals data papers. these data are not available
-
 ## atlantic camtrap ----
 
 # download data
