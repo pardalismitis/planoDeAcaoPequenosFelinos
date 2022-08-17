@@ -17,7 +17,7 @@ library(dbplyr)
 
 ### ATLANTIC CAMTRAPS
 
-Importar dados
+#### Importar dados
 ```{r}
 # prepare data papers ------------------------------------------------------------
 
@@ -30,7 +30,7 @@ Importar dados
 #unzip(zipfile = "data/data_papers/atlantic_camtrap.zip", exdir = "data/data_papers")
 ```
 
-Leitura das planilhas
+#### Leitura das planilhas
 ```{r}
 # import sites
 ca_si <- readr::read_csv(
@@ -89,7 +89,7 @@ ca_sp <- readr::read_csv(
 #ca_sp
 ```
 
-Agrupar dados
+#### Agrupar dados
 ```{r}
 # join data
 ca_occ <- ca_sp %>% 
@@ -115,11 +115,117 @@ ca_occ <- ca_sp %>%
 #ca_occ
 ```
 
-Salvar arquivo
+#### Salvar arquivo
 ```{r}
 # export data
 readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 ```
+
+### ATLANTIC LARGE MAMMALS
+
+#### Importar dados
+```{r}
+#download.file(
+#url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+#destfile = "data/data_papers/atlantic_large_mammals.zip",
+#mode = "wb"
+#)
+
+#unzip(
+#zipfile = "data/data_papers/atlantic_large_mammals.zip",
+#exdir = "data/data_papers"
+#)
+```
+
+#### Leitura de dados
+```{r}
+lm_occ <- readr::read_csv(
+  "data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"
+  ) %>% 
+    dplyr::mutate(
+      genus = str_split(
+        Actual_species_Name,
+        " ",
+        simplify = TRUE
+        )
+      [, 1],
+      species = Actual_species_Name,
+      longitude = as.numeric(Longitude),
+      latitude = as.numeric(Latitude),
+      year = as.numeric(Year_finish),
+      source = "atlantic_large_mammals"
+      ) %>%
+    dplyr::select(
+      genus,
+      species,
+      longitude,
+      latitude,
+      year,
+      source
+      ) %>% 
+    tidyr::drop_na(
+      longitude,
+      latitude
+      ) %>% 
+    dplyr::mutate(
+      species = str_trim(species)
+      ) %>% 
+    tibble::rowid_to_column() %>% 
+    dplyr::left_join(
+      .,
+      rbind(
+        unique(
+          ca_occ[, c(2, 3, 4)]
+          )
+        ),
+      by = "genus"
+      ) %>% 
+    dplyr::relocate(
+      order:family,
+      .before = 2
+      )
+#lm_occ
+```
+
+#### Salvar arquivo
+```{r}
+readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
+```
+
+### ATLANTIC CARNIVORES
+
+Importar dados
+```{r}
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+ #             destfile = "data/data_papers/neotropical_carnivores.zip", mode = "wb")
+
+# unzip
+#unzip(zipfile = "data/data_papers/neotropical_carnivores.zip", exdir = "data/data_papers")
+
+# import
+neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv") %>% 
+    dplyr::mutate(family = FAMILY,
+                  genus = GENUS,
+                  species = SPECIES,
+                  name = SPECIES, 
+                  longitude = LONG_X, 
+                  latitude = LAT_Y,
+                  year = as.numeric(COL_END_YR),
+                  source = "neotropical_carnivores") %>%
+    dplyr::select(family, genus, species, longitude, latitude, year, source) %>% 
+    dplyr::mutate(species = str_trim(species)) %>% 
+    tibble::rowid_to_column() %>% 
+    dplyr::left_join(., unique(rbind(ca_occ[, c(2, 4)], lm_occ[, c(2, 4)])), by = "genus") %>% 
+    dplyr::relocate(order, .after = 1)
+neo_car_occ
+
+# export data
+readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
+
+```
+
+
+
 
 SELEÇÃO DE GATÍNEOS
 
