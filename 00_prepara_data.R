@@ -31,11 +31,11 @@ dir.create("data/geodata")
 ## atlantic camtrap ----
 
 # download data
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
-              "data/data_papers/atlantic_camtrap.zip", mode = "wb")
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+            #  "data/data_papers/atlantic_camtrap.zip", mode = "wb")
 
 # unzip
-unzip(zipfile = "data/data_papers/atlantic_camtrap.zip", exdir = "data/data_papers")
+#unzip(zipfile = "data/data_papers/atlantic_camtrap.zip", exdir = "data/data_papers")
 
 # import sites
 ca_si <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv") %>% 
