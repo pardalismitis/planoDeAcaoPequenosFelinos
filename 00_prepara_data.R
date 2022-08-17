@@ -80,11 +80,11 @@ readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 ## atlantic large mammals ----
 
 # download data
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
-              destfile = "data/data_papers/atlantic_large_mammals.zip", mode = "wb")
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+ #             destfile = "data/data_papers/atlantic_large_mammals.zip", mode = "wb")
 
 # unzip
-unzip(zipfile = "data/data_papers/atlantic_large_mammals.zip", exdir = "data/data_papers")
+#unzip(zipfile = "data/data_papers/atlantic_large_mammals.zip", exdir = "data/data_papers")
 
 # import data
 lm_occ <- readr::read_csv("data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv") %>% 
@@ -108,11 +108,11 @@ readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
 ## neotropical carnivores ----
 
 # download data
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
-              destfile = "data/data_papers/neotropical_carnivores.zip", mode = "wb")
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+ #             destfile = "data/data_papers/neotropical_carnivores.zip", mode = "wb")
 
 # unzip
-unzip(zipfile = "data/data_papers/neotropical_carnivores.zip", exdir = "data/data_papers")
+#unzip(zipfile = "data/data_papers/neotropical_carnivores.zip", exdir = "data/data_papers")
 
 # import
 neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv") %>% 
@@ -127,50 +127,12 @@ neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_
     dplyr::select(family, genus, species, longitude, latitude, year, source) %>% 
     dplyr::mutate(species = str_trim(species)) %>% 
     tibble::rowid_to_column() %>% 
-    dplyr::left_join(., unique(rbind(ca_occ[, c(2, 4)], lm_occ[, c(2, 4)], tax[, c(1, 3)])), by = "genus") %>% 
+    dplyr::left_join(., unique(rbind(ca_occ[, c(2, 4)], lm_occ[, c(2, 4)])), by = "genus") %>% 
     dplyr::relocate(order, .after = 1)
 neo_car_occ
 
 # export data
 readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
-
-## neotropical xenarthrans ----
-
-# download data
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2663&file=ecy2663-sup-0001-DataS1.rar",
-              destfile = "data/data_papers/neotropical_xenarthrans.rar", mode = "wb")
-
-# unrar
-system("unrar e data/data_papers/neotropical_xenarthrans.rar data/data_papers/")
-
-# import
-neo_xen_qual <- readr::read_csv("data/data_papers/NEOTROPICAL_XENARTHRANS_QUALITATIVE.csv") %>%
-    dplyr::select(ORDER, FAMILY, GENUS, SPECIES, LONG_X, LAT_Y, COL_END_YR) %>% 
-    dplyr::mutate(source = "neotropical_xenarthrans")
-neo_xen_qual
-
-neo_xen_quan <- readr::read_csv("data/data_papers/NEOTROPICAL_XENARTHRANS_QUANTITATIVE.csv") %>%
-    dplyr::select(ORDER, FAMILY, GENUS, SPECIES, LONG_X, LAT_Y, COL_END_YR) %>% 
-    dplyr::mutate(source = "neotropical_xenarthrans")
-neo_xen_quan
-
-# bind data
-neo_xen_occ <- dplyr::bind_rows(neo_xen_qual, neo_xen_quan) %>% 
-    dplyr::mutate(order = ORDER, 
-                  family = FAMILY, 
-                  genus = GENUS, 
-                  species = SPECIES,
-                  name = SPECIES, 
-                  longitude = LONG_X, 
-                  latitude = LAT_Y,
-                  year = as.numeric(ifelse(COL_END_YR == 0, NA, COL_END_YR))) %>%
-    dplyr::mutate(species = str_trim(species)) %>% 
-    dplyr::select(order, family, genus, species, longitude, latitude, year, source)
-neo_xen_occ
-
-# export data
-readr::write_csv(neo_xen_occ, "data/neotropical_xenarthrans.csv")
-
 
 # prepare geodata ------------------------------------------------------------------
 
@@ -253,41 +215,25 @@ sf::st_write(uc_pi, "data/uc_pi.shp", delete_dsn = TRUE)
 
 # import data papers -------------------------------------------------------
 
-# bats
-at_bats <- readr::read_csv("data/data_papers/atlantic_bats.csv")
-at_bats
-
 # large mammals
-at_lar <- readr::read_csv("data/data_papers/atlantic_large_mammals.csv")
+at_lar <- readr::read_csv("data/atlantic_large_mammals.csv")
 at_lar
 
 # camtrap
-at_cam <- readr::read_csv("data/data_papers/atlantic_camtrap.csv")
+at_cam <- readr::read_csv("data/atlantic_camtrap.csv")
 at_cam
 
-# primates
-at_pri <- readr::read_csv("data/data_papers/atlantic_primates.csv")
-at_pri
-
-# small mammals abundance
-at_sma <- readr::read_csv("data/data_papers/atlantic_small_mammals_abu.csv")
-at_sma
-
-# small mammals presence
-at_smp <- readr::read_csv("data/data_papers/atlantic_small_mammals.csv")
-at_smp
-
 # neotropical carnivores
-neo_car <- readr::read_csv("data/data_papers/neotropical_carnivores.csv")
+neo_car <- readr::read_csv("data/neotropical_carnivores.csv")
 neo_car
 
-# neotropical xenarthrans
-neo_xen <- readr::read_csv("data/data_papers/neotropical_xenarthrans.csv")
-neo_xen
-
 # bind
-occ <- dplyr::bind_rows(at_bats, at_cam, at_lar, at_pri, at_sma, at_smp, neo_car, neo_xen) %>%
-    dplyr::select(-1) %>% 
+occ <- dplyr::bind_rows(
+  at_cam,
+  at_lar,
+  neo_car
+  ) %>%
+  dplyr::select(-1) %>% 
     dplyr::distinct(species, longitude, latitude, .keep_all = TRUE)
 occ
 
@@ -327,6 +273,51 @@ uc_pi
 occ_v_sp <- occ_v[ugrhi, ] %>% 
     tibble::rowid_to_column()
 occ_v_sp
+
+mamiferos <- occ_v
+mamiferos <- mamiferos %>%
+  dplyr::filter(
+    family == "Felidae"
+  )
+
+mamiferos <- mamiferos[!grepl("sp.", mamiferos$species),]
+
+mamiferos <- mamiferos[!grepl("Panthera onca", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Puma concolor", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Felis catus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Lynx rufus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Leopardus guigna", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Leopardus jacobita", mamiferos$species),]
+mamiferos$species <- gsub("Puma yagouaroundi","Herpailurus yagouaroundi",
+                          mamiferos$species)
+
+sort(unique(mamiferos$species))
+plot(mamiferos$geometry, pch = 20)
+
+download.file("http://www.dpi.inpe.br/amb_data/Shapefiles/UF_EstadosBR_LLWGS84.zip",
+              "data/geodata/brasil.zip", mode = "wb")
+
+unzip(zipfile = "data/geodata/brasil.zip", exdir = "data/geodata")
+
+brasil <- sf::st_read("data/geodata/vetor_EstadosBR_LLWGS84/EstadosBR_IBGE_LLWGS84.shp")
+
+gatosBrasil <- mamiferos[brasil, ] %>% 
+  tibble::rowid_to_column()
+
+plot(gatosBrasil$geometry, pch = 20)
+
+gatosBrasil$genus <- word(gatosBrasil$species,1)
+
+unique(sort(gatosBrasil$species))
+
+unique(sort(gatosBrasil$genus))
+
+unique(sort(gatosBrasil$family))
+
+unique(sort(gatosBrasil$order))
+
+gatosBrasil <- gatosBrasil %>%
+  filter(year>1999)
 
 # map
 tm_shape(ugrhi) +
