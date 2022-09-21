@@ -114,6 +114,8 @@ readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
 # unzip
 #unzip(zipfile = "data/data_papers/neotropical_carnivores.zip", exdir = "data/data_papers")
 
+sort(unique(neo_car_occ$TYPE_REC))
+
 # import
 neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv") %>% 
     dplyr::mutate(family = FAMILY,
