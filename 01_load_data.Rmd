@@ -62,7 +62,7 @@ mamiferos <- mamiferos[!grepl("Leopardus guigna", mamiferos$species),]
 mamiferos <- mamiferos[!grepl("Leopardus jacobita", mamiferos$species),]
 mamiferos$species <- gsub("Puma yagouaroundi","Herpailurus yagouaroundi",
                           mamiferos$species)
-
+sort(unique(occ_v$species))
 sort(unique(mamiferos$species))
 plot(mamiferos$geometry, pch = 20)
 
