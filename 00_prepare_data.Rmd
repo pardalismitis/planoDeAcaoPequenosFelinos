@@ -62,6 +62,11 @@ ca_occ <- ca_sp %>%
     dplyr::select(order:genus, species, longitude, latitude, year, source) %>% 
     tibble::rowid_to_column()
 ca_occ
+```
 
+
+```{r}
+# export data
+readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 ```
 
