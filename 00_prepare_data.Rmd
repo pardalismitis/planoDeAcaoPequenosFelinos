@@ -50,4 +50,18 @@ ca_sp <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv") %
 ca_sp
 ```
 
+```{r}
+# join data
+ca_occ <- ca_sp %>% 
+    dplyr::left_join(ca_si_na, by = "survey_id") %>% 
+    dplyr::mutate(species = species_name,
+                  longitude = as.numeric(X), 
+                  latitude = as.numeric(Y), 
+                  year = as.numeric(yearfinish),
+                  source = "atlantic_camtrap") %>%
+    dplyr::select(order:genus, species, longitude, latitude, year, source) %>% 
+    tibble::rowid_to_column()
+ca_occ
+
+```
 
