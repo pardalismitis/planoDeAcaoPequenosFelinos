@@ -42,6 +42,19 @@ ca_sp_na
 
 ```
 
+
+```{r}
+# import species
+ca_sp <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv") %>% 
+    dplyr::select(survey_id, species_code, presence_absence) %>% 
+    dplyr::filter(presence_absence == 1) %>% 
+    dplyr::mutate(species_code = ifelse(species_code == "Potu_flav", "Poto_flav", species_code)) %>% 
+    dplyr::left_join(., ca_sp_na, by = "species_code") %>% 
+    dplyr::select(-c(presence_absence,  species_code))
+ca_sp
+
+```
+
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
