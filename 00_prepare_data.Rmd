@@ -70,3 +70,70 @@ ca_occ
 readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 ```
 
+## Atlantic Large Mammals
+
+```{r}
+# import data
+lm_occ <- readr::read_csv("data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv") %>% 
+    dplyr::mutate(genus = str_split(Actual_species_Name, " ", simplify = TRUE)[, 1],
+                  species = Actual_species_Name,
+                  longitude = as.numeric(Longitude), 
+                  latitude = as.numeric(Latitude), 
+                  year = as.numeric(Year_finish),
+                  source = "atlantic_large_mammals") %>%
+    dplyr::select(genus, species, longitude, latitude, year, source) %>% 
+    tidyr::drop_na(longitude, latitude) %>% 
+    dplyr::mutate(species = str_trim(species)) %>% 
+    tibble::rowid_to_column() %>% 
+    dplyr::left_join(., rbind(unique(ca_occ[, c(2, 3, 4)])), by = "genus") %>% 
+    dplyr::relocate(order:family, .before = 2)
+lm_occ
+```
+
+```{r}
+# export data
+readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
+
+```
+
+## Neotropical Carnivores
+
+```{r}
+# import
+neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv")
+
+neo_car_occ <- neo_car_occ[!grepl("Informal interview", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Interview", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Scratch", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Sign", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Scat", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Vocalization", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Track", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Sighting", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Literature review", neo_car_occ$TYPE_REC),]
+
+sort(unique(neo_car_occ$TYPE_REC))
+
+neo_car_occ <- neo_car_occ %>%
+    dplyr::mutate(family = FAMILY,
+                  genus = GENUS,
+                  species = SPECIES,
+                  name = SPECIES, 
+                  longitude = LONG_X, 
+                  latitude = LAT_Y,
+                  year = as.numeric(COL_END_YR),
+                  source = "neotropical_carnivores") %>%
+    dplyr::select(family, genus, species, longitude, latitude, year, source) %>% 
+    dplyr::mutate(species = str_trim(species)) %>% 
+    tibble::rowid_to_column() %>% 
+    dplyr::left_join(., unique(rbind(ca_occ[, c(2, 4)], lm_occ[, c(2, 4)])), by = "genus") %>% 
+    dplyr::relocate(order, .after = 1)
+neo_car_occ
+```
+
+```{r}
+# export data
+readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
+
+```
+
