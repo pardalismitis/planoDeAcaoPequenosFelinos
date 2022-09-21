@@ -23,6 +23,22 @@ sf::sf_use_s2(FALSE)
 ca_si <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv") %>% 
     dplyr::select(location_id, X, Y)
 ca_si
+```
+
+```{r}
+# import sites names
+ca_si_na <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv") %>% 
+    dplyr::left_join(., ca_si, by = "location_id") %>% 
+    dplyr::select(location_id, survey_id, yearfinish,  X, Y)
+ca_si_na
+```
+
+
+```{r}
+# import species names
+ca_sp_na <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv") %>% 
+    dplyr::select(order:genus, species_name, species_code)
+ca_sp_na
 
 ```
 
