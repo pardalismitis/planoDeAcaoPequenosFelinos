@@ -152,7 +152,7 @@ ugrhi
 ## Inventario Florestal 2020 ----
 download.file("http://datageo.ambiente.sp.gov.br/geoserver/datageo/InventarioFlorestal2020/wfs?version=1.0.0&request=GetFeature&outputFormat=SHAPE-ZIP&typeName=InventarioFlorestal2020",
               "data/geodata/InventarioFlorestal2020.zip", mode = "wb")
-unzip(zipfile = "data/geodata/InventarioFlorestal2020.zip", exdir = "data/")
+unzip(zipfile = "data/geodata/InventarioFlorestal2020.zip", exdir = "data/geodata")
 
 inventario_florestal <- sf::st_read("data/geodata/InventarioFlorestal2020.shp",
                                     options = "ENCODING=WINDOWS-1252") %>% 
