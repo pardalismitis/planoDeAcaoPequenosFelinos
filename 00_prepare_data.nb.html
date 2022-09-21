@@ -1808,18 +1808,49 @@ sf::sf_use_s2(FALSE)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbXBvcnQgc2l0ZXNcbmNhX3NpIDwtIHJlYWRyOjpyZWFkX2NzdihcImRhdGEvZGF0YV9wYXBlcnMvQVRMQU5USUNfQ0FNVFJBUFNfMS0wX0xPQ0FUSU9OLmNzdlwiKSAlPiUgXG4gICAgZHBseXI6OnNlbGVjdChsb2NhdGlvbl9pZCwgWCwgWSlcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbXBvcnQgc2l0ZXNcbmNhX3NpIDwtIHJlYWRyOjpyZWFkX2NzdihcImRhdGEvZGF0YV9wYXBlcnMvQVRMQU5USUNfQ0FNVFJBUFNfMS0wX0xPQ0FUSU9OLmNzdlwiKSAlPiUgXG4gICAgZHBseXI6OnNlbGVjdChsb2NhdGlvbl9pZCwgWCwgWSlcbmNhX3NpXG5gYGAifQ== -->
 <pre class="r"><code># import sites
 ca_si &lt;- readr::read_csv(&quot;data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv&quot;) %&gt;% 
     dplyr::select(location_id, X, Y)
+ca_si</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbXBvcnQgc2l0ZXMgbmFtZXNcbmNhX3NpX25hIDwtIHJlYWRyOjpyZWFkX2NzdihcImRhdGEvZGF0YV9wYXBlcnMvQVRMQU5USUNfQ0FNVFJBUFNfMS0wX1NVUlZFWS5jc3ZcIikgJT4lIFxuICAgIGRwbHlyOjpsZWZ0X2pvaW4oLiwgY2Ffc2ksIGJ5ID0gXCJsb2NhdGlvbl9pZFwiKSAlPiUgXG4gICAgZHBseXI6OnNlbGVjdChsb2NhdGlvbl9pZCwgc3VydmV5X2lkLCB5ZWFyZmluaXNoLCAgWCwgWSlcblxuYGBgIn0= -->
+<pre class="r"><code># import sites names
+ca_si_na &lt;- readr::read_csv(&quot;data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv&quot;) %&gt;% 
+    dplyr::left_join(., ca_si, by = &quot;location_id&quot;) %&gt;% 
+    dplyr::select(location_id, survey_id, yearfinish,  X, Y)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTQ0IENvbHVtbnM6IDExXG4tLSBDb2x1bW4gc3BlY2lmaWNhdGlvbiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICg2KTogc2l0ZSwgbXVuaWNpcGFsaXR5LCBzdGF0ZSwgY291bnRyeSwgdmVnZXRhdGlvbl90eXBlLCBQQVxuZGJsICg1KTogbG9jYXRpb25faWQsIFgsIFksIEFsdGl0dWRlTWluLCBBbHRpdHVkZU1heFxuXG5pIFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxuaSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
-<pre><code>Rows: 144 Columns: 11
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTcwIENvbHVtbnM6IDE2XG4tLSBDb2x1bW4gc3BlY2lmaWNhdGlvbiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICAoNSk6IGNhbV90eXBlLCBkZXNpZ24sIGNhbV9zcGFjaW5nX29icywgYmFpdGluZywgcmVjb3JkX29ic1xuZGJsICgxMSk6IHN0dWR5X2lkLCBsb2NhdGlvbl9pZCwgc3VydmV5X2lkLCBtb250aHN0YXJ0LCB5ZWFyc3RhcnQsIG1vbnRoZmluaXNoLCB5ZWFyZmluaXNoLCBlZmZvcnQsIG5fYy4uLlxuXG5pIFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxuaSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
+<pre><code>Rows: 170 Columns: 16
 -- Column specification -----------------------------------------------------------------------------------
 Delimiter: &quot;,&quot;
-chr (6): site, municipality, state, country, vegetation_type, PA
-dbl (5): location_id, X, Y, AltitudeMin, AltitudeMax
+chr  (5): cam_type, design, cam_spacing_obs, baiting, record_obs
+dbl (11): study_id, location_id, survey_id, monthstart, yearstart, monthfinish, yearfinish, effort, n_c...
+
+i Use `spec()` to retrieve the full column specification for this data.
+i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbXBvcnQgc3BlY2llcyBuYW1lc1xuY2Ffc3BfbmEgPC0gcmVhZHI6OnJlYWRfY3N2KFwiZGF0YS9kYXRhX3BhcGVycy9BVExBTlRJQ19DQU1UUkFQU18xLTBfU1BFQ0lFUy5jc3ZcIikgJT4lIFxuICAgIGRwbHlyOjpzZWxlY3Qob3JkZXI6Z2VudXMsIHNwZWNpZXNfbmFtZSwgc3BlY2llc19jb2RlKVxuXG5gYGAifQ== -->
+<pre class="r"><code># import species names
+ca_sp_na &lt;- readr::read_csv(&quot;data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv&quot;) %&gt;% 
+    dplyr::select(order:genus, species_name, species_code)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogODMgQ29sdW1uczogOFxuLS0gQ29sdW1uIHNwZWNpZmljYXRpb24gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbkRlbGltaXRlcjogXCIsXCJcbmNociAoNyk6IG9yZGVyLCBmYW1pbHksIGdlbnVzLCBzcGVjaWVzLCBzcGVjaWVzX25hbWUsIHNwZWNpZXNfY29kZSwgaXVjbl9zdGF0dXNcbmRibCAoMSk6IHNwZWNpZXNfaWRcblxuaSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbmkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
+<pre><code>Rows: 83 Columns: 8
+-- Column specification -----------------------------------------------------------------------------------
+Delimiter: &quot;,&quot;
+chr (7): order, family, genus, species, species_name, species_code, iucn_status
+dbl (1): species_id
 
 i Use `spec()` to retrieve the full column specification for this data.
 i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
@@ -1837,7 +1868,7 @@ run any R code chunks. Instead, the output of the chunk when it was last
 run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCg0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KDQoNCmBgYHtyfQ0KIyBvcHRpb25zDQpvcHRpb25zKHRpbWVvdXQgPSAxZTYpDQpzZjo6c2ZfdXNlX3MyKEZBTFNFKQ0KYGBgDQoNCmBgYHtyfQ0KIyBpbXBvcnQgc2l0ZXMNCmNhX3NpIDwtIHJlYWRyOjpyZWFkX2NzdigiZGF0YS9kYXRhX3BhcGVycy9BVExBTlRJQ19DQU1UUkFQU18xLTBfTE9DQVRJT04uY3N2IikgJT4lIA0KICAgIGRwbHlyOjpzZWxlY3QobG9jYXRpb25faWQsIFgsIFkpDQpjYV9zaQ0KDQpgYGANCg0KQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLg0KDQpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4NCg0KVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCg0KYGBge3J9DQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmBgYA0KDQoNCmBgYHtyfQ0KIyBvcHRpb25zDQpvcHRpb25zKHRpbWVvdXQgPSAxZTYpDQpzZjo6c2ZfdXNlX3MyKEZBTFNFKQ0KYGBgDQoNCmBgYHtyfQ0KIyBpbXBvcnQgc2l0ZXMNCmNhX3NpIDwtIHJlYWRyOjpyZWFkX2NzdigiZGF0YS9kYXRhX3BhcGVycy9BVExBTlRJQ19DQU1UUkFQU18xLTBfTE9DQVRJT04uY3N2IikgJT4lIA0KICAgIGRwbHlyOjpzZWxlY3QobG9jYXRpb25faWQsIFgsIFkpDQpjYV9zaQ0KYGBgDQoNCmBgYHtyfQ0KIyBpbXBvcnQgc2l0ZXMgbmFtZXMNCmNhX3NpX25hIDwtIHJlYWRyOjpyZWFkX2NzdigiZGF0YS9kYXRhX3BhcGVycy9BVExBTlRJQ19DQU1UUkFQU18xLTBfU1VSVkVZLmNzdiIpICU+JSANCiAgICBkcGx5cjo6bGVmdF9qb2luKC4sIGNhX3NpLCBieSA9ICJsb2NhdGlvbl9pZCIpICU+JSANCiAgICBkcGx5cjo6c2VsZWN0KGxvY2F0aW9uX2lkLCBzdXJ2ZXlfaWQsIHllYXJmaW5pc2gsICBYLCBZKQ0KY2Ffc2lfbmENCmBgYA0KDQoNCmBgYHtyfQ0KIyBpbXBvcnQgc3BlY2llcyBuYW1lcw0KY2Ffc3BfbmEgPC0gcmVhZHI6OnJlYWRfY3N2KCJkYXRhL2RhdGFfcGFwZXJzL0FUTEFOVElDX0NBTVRSQVBTXzEtMF9TUEVDSUVTLmNzdiIpICU+JSANCiAgICBkcGx5cjo6c2VsZWN0KG9yZGVyOmdlbnVzLCBzcGVjaWVzX25hbWUsIHNwZWNpZXNfY29kZSkNCmNhX3NwX25hDQoNCmBgYA0KDQpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ3RybCtBbHQrSSouDQoNCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ3RybCtTaGlmdCtLKiB0byBwcmV2aWV3IHRoZSBIVE1MIGZpbGUpLg0KDQpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuDQo=</div>
 
 
 
