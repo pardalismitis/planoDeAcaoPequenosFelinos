@@ -23,11 +23,11 @@ library(dbplyr)
 
 #' here i prepare the data from mammals data papers. these data are not available
 # download data
-#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
-            #  "data/data_papers/atlantic_camtrap.zip", mode = "wb")
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+              "data/data_papers/atlantic_camtrap.zip", mode = "wb")
 
-# unzip
-#unzip(zipfile = "data/data_papers/atlantic_camtrap.zip", exdir = "data/data_papers")
+ unzip
+unzip(zipfile = "data/data_papers/atlantic_camtrap.zip", exdir = "data/data_papers")
 ```
 
 #### Leitura das planilhas

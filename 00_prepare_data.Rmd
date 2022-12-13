@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Preparação de dados - Ação 6.1"
 output: html_notebook
 ---
 
@@ -7,11 +7,47 @@ output: html_notebook
 library(tidyverse)
 ```
 
-
 ```{r}
 # options
 options(timeout = 1e6)
 sf::sf_use_s2(FALSE)
+```
+
+#### Importar dados
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/atlantic_camtrap.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/atlantic_camtrap.zip",
+    exdir = "data/data_papers"
+    )
+```
+
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/atlantic_large_mammals.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/atlantic_large_mammals.zip",
+    exdir = "data/data_papers"
+    )
+```
+
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/neotropical_carnivores.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/neotropical_carnivores.zip",
+    exdir = "data/data_papers"
+    )
 ```
 
 ## Atlantic-Camtraps
