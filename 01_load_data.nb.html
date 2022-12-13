@@ -11,7 +11,7 @@
 
 
 
-<title>R Notebook</title>
+<title>Organização e limpeza - Ação 6.1</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1760,7 +1760,7 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">R Notebook</h1>
+<h1 class="title toc-ignore">Organização e limpeza - Ação 6.1</h1>
 
 </div>
 
@@ -1768,94 +1768,74 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBuZW90cm9waWNhbCBjYXJuaXZvcmVzXG5uZW9fY2FyIDwtIHJlYWRyOjpyZWFkX2NzdihcImRhdGEvbmVvdHJvcGljYWxfY2Fybml2b3Jlcy5jc3ZcIilcblxuYGBgIn0= -->
-<pre class="r"><code># neotropical carnivores
-neo_car &lt;- readr::read_csv(&quot;data/neotropical_carnivores.csv&quot;)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogODU2MjcgQ29sdW1uczogOVxuLS0gQ29sdW1uIHNwZWNpZmljYXRpb24gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbkRlbGltaXRlcjogXCIsXCJcbmNociAoNSk6IG9yZGVyLCBmYW1pbHksIGdlbnVzLCBzcGVjaWVzLCBzb3VyY2VcbmRibCAoNCk6IHJvd2lkLCBsb25naXR1ZGUsIGxhdGl0dWRlLCB5ZWFyXG5cbmkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG5pIFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
-<pre><code>Rows: 85627 Columns: 9
--- Column specification -----------------------------------------------------------------------------------
-Delimiter: &quot;,&quot;
-chr (5): order, family, genus, species, source
-dbl (4): rowid, longitude, latitude, year
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBsYXJnZSBtYW1tYWxzXG5hdF9sYXIgPC0gcmVhZHI6OnJlYWRfY3N2KFwiZGF0YS9hdGxhbnRpY19sYXJnZV9tYW1tYWxzLmNzdlwiKVxuYXRfbGFyXG5cbiMgY2FtdHJhcFxuYXRfY2FtIDwtIHJlYWRyOjpyZWFkX2NzdihcImRhdGEvYXRsYW50aWNfY2FtdHJhcC5jc3ZcIilcbmF0X2NhbVxuXG4jIG5lb3Ryb3BpY2FsIGNhcm5pdm9yZXNcbm5lb19jYXIgPC0gcmVhZHI6OnJlYWRfY3N2KFwiZGF0YS9uZW90cm9waWNhbF9jYXJuaXZvcmVzLmNzdlwiKVxubmVvX2NhclxuXG4jIGJpbmRcbm9jYyA8LSBkcGx5cjo6YmluZF9yb3dzKFxuICBhdF9jYW0sXG4gIGF0X2xhcixcbiAgbmVvX2NhclxuICApICU+JVxuICBkcGx5cjo6c2VsZWN0KC0xKSAlPiUgXG4gICAgZHBseXI6OmRpc3RpbmN0KHNwZWNpZXMsIGxvbmdpdHVkZSwgbGF0aXR1ZGUsIC5rZWVwX2FsbCA9IFRSVUUpXG5vY2NcblxuYGBgIn0= -->
+<pre class="r"><code># large mammals
+at_lar &lt;- readr::read_csv(&quot;data/atlantic_large_mammals.csv&quot;)
+at_lar
 
-i Use `spec()` to retrieve the full column specification for this data.
-i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29ydCh1bmlxdWUob2NjX3Ykc3BlY2llcykpXG5cbmBgYCJ9 -->
-<pre class="r"><code>sort(unique(occ_v$species))
+# camtrap
+at_cam &lt;- readr::read_csv(&quot;data/atlantic_camtrap.csv&quot;)
+at_cam
+
+# neotropical carnivores
+neo_car &lt;- readr::read_csv(&quot;data/neotropical_carnivores.csv&quot;)
+neo_car
+
+# bind
+occ &lt;- dplyr::bind_rows(
+  at_cam,
+  at_lar,
+  neo_car
+  ) %&gt;%
+  dplyr::select(-1) %&gt;% 
+    dplyr::distinct(species, longitude, latitude, .keep_all = TRUE)
+occ
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICBbMV0gXCJBbG91YXR0YSBjYXJheWFcIiAgICAgICAgICAgIFwiQWxvdWF0dGEgY2xhbWl0YW5zXCIgICAgICAgICBcIkFsb3VhdHRhIGd1YXJpYmFcIiAgICAgICAgICBcbiAgWzRdIFwiQWxvdWF0dGEgZ3VhcmliYSBjbGFtaXRhbnNcIiBcIkFsb3VhdHRhIHNwLlwiICAgICAgICAgICAgICAgXCJBdGVsb2N5bnVzIG1pY3JvdGlzXCIgICAgICAgXG4gIFs3XSBcIkJhc3NhcmljeW9uIGFsbGVuaVwiICAgICAgICAgXCJCYXNzYXJpY3lvbiBtZWRpdXNcIiAgICAgICAgIFwiQmFzc2FyaXNjdXMgYXN0dXR1c1wiICAgICAgIFxuIFsxMF0gXCJCYXNzYXJpc2N1cyBzdW1pY2hyYXN0aVwiICAgIFwiQmxhc3RvY2VydXMgZGljaG90b211c1wiICAgICBcIkJvcyB0YXVydXNcIiAgICAgICAgICAgICAgICBcbiBbMTNdIFwiQnJhY2h5dGVsZXMgYXJhY2hub2lkZXNcIiAgICBcIkJyYWNoeXRlbGVzIGh5cG94YW50aHVzXCIgICAgXCJCcmFkeXB1cyB0b3JxdWF0dXNcIiAgICAgICAgXG4gWzE2XSBcIkJyYWR5cHVzIHZhcmllZ2F0dXNcIiAgICAgICAgXCJDYWJhc3NvdXMgc3AuXCIgICAgICAgICAgICAgIFwiQ2FiYXNzb3VzIHRhdG91YXlcIiAgICAgICAgIFxuIFsxOV0gXCJDYWJhc3NvdXMgdW5pY2luY3R1c1wiICAgICAgIFwiQ2FsbGljZWJ1cyBjb2ltYnJhaVwiICAgICAgICBcIkNhbGxpY2VidXMgbWVsYW5vY2hpclwiICAgICBcbiBbMjJdIFwiQ2FsbGljZWJ1cyBuaWdyaWZyb25zXCIgICAgICBcIkNhbGxpY2VidXMgcGVyc29uYXR1c1wiICAgICAgXCJDYWxsaXRocml4IGF1cml0YVwiICAgICAgICAgXG4gWzI1XSBcIkNhbGxpdGhyaXggZmxhdmljZXBzXCIgICAgICAgXCJDYWxsaXRocml4IGdlb2Zmcm95aVwiICAgICAgIFwiQ2FsbGl0aHJpeCBqYWNjaHVzXCIgICAgICAgIFxuIFsyOF0gXCJDYWxsaXRocml4IGt1aGxpaVwiICAgICAgICAgIFwiQ2FsbGl0aHJpeCBrdWhsbGlcIiAgICAgICAgICBcIkNhbGxpdGhyaXggcGVuaWNpbGxhdGFcIiAgICBcbiBbMzFdIFwiQ2FsbGl0aHJpeCBzcC5cIiAgICAgICAgICAgICBcIkNhbmlzIGZhbWlsaWFyaXNcIiAgICAgICAgICAgXCJDYW5pcyBsYXRyYW5zXCIgICAgICAgICAgICAgXG4gWzM0XSBcIkNhbmlzIGx1cHVzXCIgICAgICAgICAgICAgICAgXCJDYXZpYSBhcGVyZWFcIiAgICAgICAgICAgICAgIFwiQ2F2aWEgY2YuIG1hZ25hXCIgICAgICAgICAgIFxuIFszN10gXCJDYXZpYSBmdWxnaWRhXCIgICAgICAgICAgICAgIFwiQ2F2aWEgaW50ZXJtZWRpYVwiICAgICAgICAgICBcIkNhdmlhIHNwLlwiICAgICAgICAgICAgICAgICBcbiBbNDBdIFwiQ2VyZG9jeW9uIHRob3VzXCIgICAgICAgICAgICBcIkNoYWV0b215cyBzdWJzcGlub3N1c1wiICAgICAgXCJDaHJ5c29jeW9uIGJyYWNoeXVydXNcIiAgICAgXG4gWzQzXSBcIkNvZW5kb3UgaW5zaWRpb3N1c1wiICAgICAgICAgXCJDb2VuZG91IHByZWhlbnNpbGlzXCIgICAgICAgIFwiQ29lbmRvdSBzcC5cIiAgICAgICAgICAgICAgIFxuIFs0Nl0gXCJDb2VuZG91IHNwaW5vc3VzXCIgICAgICAgICAgIFwiQ29uZXBhdHVzIGNoaW5nYVwiICAgICAgICAgICBcIkNvbmVwYXR1cyBsZXVjb25vdHVzXCIgICAgICBcbiBbNDldIFwiQ29uZXBhdHVzIHNlbWlzdHJpYXR1c1wiICAgICBcIkNvbmVwYXR1cyBzcC5cIiAgICAgICAgICAgICAgXCJDdW5pY3VsdXMgcGFjYVwiICAgICAgICAgICAgXG4gWzUyXSBcIkN5Y2xvcGVzIGRpZGFjdHlsdXNcIiAgICAgICAgXCJEYXN5cHJvY3RhIGF6YXJhZVwiICAgICAgICAgIFwiRGFzeXByb2N0YSBpYWNraVwiICAgICAgICAgIFxuIFs1NV0gXCJEYXN5cHJvY3RhIGxlcG9yaW5hXCIgICAgICAgIFwiRGFzeXByb2N0YSBzcC5cIiAgICAgICAgICAgICBcIkRhc3lwdXMgaHlicmlkdXNcIiAgICAgICAgICBcbiBbNThdIFwiRGFzeXB1cyBub3ZlbWNpbmN0dXNcIiAgICAgICBcIkRhc3lwdXMgc2VwdGVtY2luY3R1c1wiICAgICAgXCJEYXN5cHVzIHNwLlwiICAgICAgICAgICAgICAgXG4gWzYxXSBcIkRheXByb2N0YSBhemFyYWVcIiAgICAgICAgICAgXCJEaWRlbHBoaXMgYWxiaXZlbnRyaXNcIiAgICAgIFwiRGlkZWxwaGlzIGF1cml0YVwiICAgICAgICAgIFxuIFs2NF0gXCJEaWRlbHBoaXMgc3AuXCIgICAgICAgICAgICAgIFwiRWlyYSBiYXJiYXJhXCIgICAgICAgICAgICAgICBcIkVxdXVzIGNhYmFsdXNcIiAgICAgICAgICAgICBcbiBbNjddIFwiRXVwaHJhY3R1cyBzZXhjaW5jdHVzXCIgICAgICBcIkZlbGlzIGNhdHVzXCIgICAgICAgICAgICAgICAgXCJGZWxpcyBzcC5cIiAgICAgICAgICAgICAgICAgXG4gWzcwXSBcIkdhbGVhIHNwaXhpaVwiICAgICAgICAgICAgICAgXCJHYWxpY3RpcyBjdWphXCIgICAgICAgICAgICAgIFwiR2FsaWN0aXMgc3AuXCIgICAgICAgICAgICAgIFxuIFs3M10gXCJHYWxpY3RpcyB2aXR0YXRhXCIgICAgICAgICAgIFwiR3JhY2lsaW5hbnVzIGFnaWxpc1wiICAgICAgICBcIkdyYWNpbGluYW51cyBtaWNyb3RhcnN1c1wiICBcbiBbNzZdIFwiR3Vlcmxpbmd1ZXR1cyBicmFzaWxpZW5zaXNcIiBcIkd1ZXJsaW5ndWV0dXMgc3AuXCIgICAgICAgICAgXCJIZXJwYWlsdXJ1cyB5YWdvdWFyb3VuZGlcIiAgXG4gWzc5XSBcIkh5ZHJvY2hvZXJ1cyBoeWRyb2NoYWVyaXNcIiAgXCJKdWxpb215cyBwaWN0aXBlc1wiICAgICAgICAgIFwiTGVvbnRvcGl0aGVjdXMgY2hyeXNvbWVsYXNcIlxuIFs4Ml0gXCJMZW9udG9waXRoZWN1cyBjaHJ5c29weWd1c1wiIFwiTGVvcGFyZHVzIGNvbG9jb2xvXCIgICAgICAgICBcIkxlb3BhcmR1cyBnZW9mZnJveWlcIiAgICAgICBcbiBbODVdIFwiTGVvcGFyZHVzIGd1aWduYVwiICAgICAgICAgICBcIkxlb3BhcmR1cyBndXR0dWx1c1wiICAgICAgICAgXCJMZW9wYXJkdXMgamFjb2JpdGFcIiAgICAgICAgXG4gWzg4XSBcIkxlb3BhcmR1cyBwYXJkYWxpc1wiICAgICAgICAgXCJMZW9wYXJkdXMgc3AuXCIgICAgICAgICAgICAgIFwiTGVvcGFyZHVzIHRpZ3JpbnVzXCIgICAgICAgIFxuIFs5MV0gXCJMZW9wYXJkdXMgd2llZGlpXCIgICAgICAgICAgIFwiTGVwdXMgY2FwZW5zaXNcIiAgICAgICAgICAgICBcIkxlcHVzIGV1cm9wYWV1c1wiICAgICAgICAgICBcbiBbOTRdIFwiTG9udHJhIGNhbmFkZW5zaXNcIiAgICAgICAgICBcIkxvbnRyYSBsb25naWNhdWRpc1wiICAgICAgICAgXCJMb250cmEgcHJvdm9jYXhcIiAgICAgICAgICAgXG4gWzk3XSBcIkxvbnRyYSBzcC5cIiAgICAgICAgICAgICAgICAgXCJMeWNhbG9wZXggY3VscGFldXNcIiAgICAgICAgIFwiTHljYWxvcGV4IGZ1bHZpcGVzXCIgICAgICAgIFxuWzEwMF0gXCJMeWNhbG9wZXggZ3Jpc2V1c1wiICAgICAgICAgIFwiTHljYWxvcGV4IGd5bW5vY2VyY3VzXCIgICAgICBcIkx5Y2Fsb3BleCBzZWNodXJhZVwiICAgICAgICBcblsxMDNdIFwiTHljYWxvcGV4IHNwLlwiICAgICAgICAgICAgICBcIkx5Y2Fsb3BleCB2ZXR1bHVzXCIgICAgICAgICAgXCJMeW5jb2RvbiBwYXRhZ29uaWN1c1wiICAgICAgXG5bMTA2XSBcIkx5bnggcnVmdXNcIiAgICAgICAgICAgICAgICAgXCJNYXJtb3NhIG11cmluYVwiICAgICAgICAgICAgIFwiTWFybW9zb3BzIGluY2FudXNcIiAgICAgICAgIFxuWzEwOV0gXCJNYXJtb3NvcHMgc3AuXCIgICAgICAgICAgICAgIFwiTWF6YW1hIGFtZXJpY2FuYVwiICAgICAgICAgICBcIk1hemFtYSBib3Jvcm9cIiAgICAgICAgICAgICBcblsxMTJdIFwiTWF6YW1hIGdvdWF6b3ViaXJhXCIgICAgICAgICBcIk1hemFtYSBuYW5hXCIgICAgICAgICAgICAgICAgXCJNYXphbWEgcnVmaW5hXCIgICAgICAgICAgICAgXG5bMTE1XSBcIk1hemFtYSBzcC5cIiAgICAgICAgICAgICAgICAgXCJNZXBoaXRpcyBtYWNyb3VyYVwiICAgICAgICAgIFwiTWVwaGl0aXMgbWVwaGl0aXNcIiAgICAgICAgIFxuWzExOF0gXCJNZXBoaXRpcyBzcC5cIiAgICAgICAgICAgICAgIFwiTWV0YWNoaXJ1cyBudWRpY2F1ZGF0dXNcIiAgICBcIk1vbm9kZWxwaGlzIHNjYWxvcHNcIiAgICAgICBcblsxMjFdIFwiTXVzdGVsYSBhZnJpY2FuYVwiICAgICAgICAgICBcIk11c3RlbGEgZnJlbmF0YVwiICAgICAgICAgICAgXCJNdXN0ZWxhIG5pZ3JpcGVzXCIgICAgICAgICAgXG5bMTI0XSBcIk15b2Nhc3RvciBjb3lwdXNcIiAgICAgICAgICAgXCJNeXJtZWNvcGhhZ2EgdHJpZGFjdHlsYVwiICAgIFwiTmFzdWEgbmFyaWNhXCIgICAgICAgICAgICAgIFxuWzEyN10gXCJOYXN1YSBuYXN1YVwiICAgICAgICAgICAgICAgIFwiTmFzdWEgc3AuXCIgICAgICAgICAgICAgICAgICBcIk5lY3RvbXlzIHNxdWFtaXBlc1wiICAgICAgICBcblsxMzBdIFwiT3pvdG9jZXJ1cyBiZXpvYXJ0aWN1c1wiICAgICBcIlBhbnRoZXJhIG9uY2FcIiAgICAgICAgICAgICAgXCJQZWNhcmkgdGFqYWN1XCIgICAgICAgICAgICAgXG5bMTMzXSBcIlBoaWxhbmRlciBmcmVuYXR1c1wiICAgICAgICAgXCJQaGlsYW5kZXIgb3Bvc3N1bVwiICAgICAgICAgIFwiUG90b3MgZmxhdnVzXCIgICAgICAgICAgICAgIFxuWzEzNl0gXCJQcmlvZG9udGVzIG1heGltdXNcIiAgICAgICAgIFwiUHJvY3lvbiBjYW5jcml2b3J1c1wiICAgICAgICBcIlByb2N5b24gbG90b3JcIiAgICAgICAgICAgICBcblsxMzldIFwiUHJvY3lvbiBweWdtYWV1c1wiICAgICAgICAgICBcIlB0ZXJvbnVyYSBicmFzaWxpZW5zZXNcIiAgICAgXCJQdGVyb251cmEgYnJhc2lsaWVuc2lzXCIgICAgXG5bMTQyXSBcIlB1bWEgY29uY29sb3JcIiAgICAgICAgICAgICAgXCJQdW1hIHNwLlwiICAgICAgICAgICAgICAgICAgIFwiUHVtYSB5YWdvdWFyb3VuZGlcIiAgICAgICAgIFxuWzE0NV0gXCJTYXBhanVzIGFwZWxsYVwiICAgICAgICAgICAgIFwiU2FwYWp1cyBjYXlcIiAgICAgICAgICAgICAgICBcIlNhcGFqdXMgbGliaWRpbm9zdXNcIiAgICAgICBcblsxNDhdIFwiU2FwYWp1cyBuaWdyaXR1c1wiICAgICAgICAgICBcIlNhcGFqdXMgbmlncml0dXMgY3VjdWxhdHVzXCIgXCJTYXBhanVzIHJvYnVzdHVzXCIgICAgICAgICAgXG5bMTUxXSBcIlNhcGFqdXMgeGFudGhvc3Rlcm5vc1wiICAgICAgXCJTY2l1cnVzIGFlc3R1YW5zXCIgICAgICAgICAgIFwiU29vcmV0YW15cyBhbmdvdXlhXCIgICAgICAgIFxuWzE1NF0gXCJTcGVvdGhvcyB2ZW5hdGljdXNcIiAgICAgICAgIFwiU3BoaWdndXJ1cyBpbnNpZGlvc3VzXCIgICAgICBcIlNwaGlnZ3VydXMgdmlsbG9zdXNcIiAgICAgICBcblsxNTddIFwiU3BpbG9nYWxlIGFuZ3VzdGlmcm9uc1wiICAgICBcIlNwaWxvZ2FsZSBncmFjaWxpc1wiICAgICAgICAgXCJTcGlsb2dhbGUgcHV0b3JpdXNcIiAgICAgICAgXG5bMTYwXSBcIlNwaWxvZ2FsZSBweWdtYWVhXCIgICAgICAgICAgXCJTcGlsb2dhbGUgc3AuXCIgICAgICAgICAgICAgIFwiU3R1cm5pcmEgbGlsaXVtXCIgICAgICAgICAgIFxuWzE2M10gXCJTdXMgc2Nyb2ZhXCIgICAgICAgICAgICAgICAgIFwiU3lsdmlsYWd1cyBicmFzaWxpZW5zaXNcIiAgICBcIlRhbWFuZHVhIHRldHJhZGFjdHlsYVwiICAgICBcblsxNjZdIFwiVGFwaXJ1cyB0ZXJyZXN0cmlzXCIgICAgICAgICBcIlRheGlkZWEgdGF4dXNcIiAgICAgICAgICAgICAgXCJUYXlhc3N1IHBlY2FyaVwiICAgICAgICAgICAgXG5bMTY5XSBcIlRyZW1hcmN0b3Mgb3JuYXR1c1wiICAgICAgICAgXCJUcmlub215cyBkaW1pZGlhdHVzXCIgICAgICAgIFwiVHJpbm9teXMgaWhlcmluZ2lcIiAgICAgICAgIFxuWzE3Ml0gXCJVcm9jeW9uIGNpbmVyZW9hcmdlbnRldXNcIiAgIFwiVXJzdXMgYW1lcmljYW51c1wiICAgICAgICAgICBcIlVyc3VzIGFyY3Rvc1wiICAgICAgICAgICAgICBcblsxNzVdIFwiVnVscGVzIG1hY3JvdGlzXCIgICAgICAgICAgIFxuIn0= -->
-<pre><code>  [1] &quot;Alouatta caraya&quot;            &quot;Alouatta clamitans&quot;         &quot;Alouatta guariba&quot;          
-  [4] &quot;Alouatta guariba clamitans&quot; &quot;Alouatta sp.&quot;               &quot;Atelocynus microtis&quot;       
-  [7] &quot;Bassaricyon alleni&quot;         &quot;Bassaricyon medius&quot;         &quot;Bassariscus astutus&quot;       
- [10] &quot;Bassariscus sumichrasti&quot;    &quot;Blastocerus dichotomus&quot;     &quot;Bos taurus&quot;                
- [13] &quot;Brachyteles arachnoides&quot;    &quot;Brachyteles hypoxanthus&quot;    &quot;Bradypus torquatus&quot;        
- [16] &quot;Bradypus variegatus&quot;        &quot;Cabassous sp.&quot;              &quot;Cabassous tatouay&quot;         
- [19] &quot;Cabassous unicinctus&quot;       &quot;Callicebus coimbrai&quot;        &quot;Callicebus melanochir&quot;     
- [22] &quot;Callicebus nigrifrons&quot;      &quot;Callicebus personatus&quot;      &quot;Callithrix aurita&quot;         
- [25] &quot;Callithrix flaviceps&quot;       &quot;Callithrix geoffroyi&quot;       &quot;Callithrix jacchus&quot;        
- [28] &quot;Callithrix kuhlii&quot;          &quot;Callithrix kuhlli&quot;          &quot;Callithrix penicillata&quot;    
- [31] &quot;Callithrix sp.&quot;             &quot;Canis familiaris&quot;           &quot;Canis latrans&quot;             
- [34] &quot;Canis lupus&quot;                &quot;Cavia aperea&quot;               &quot;Cavia cf. magna&quot;           
- [37] &quot;Cavia fulgida&quot;              &quot;Cavia intermedia&quot;           &quot;Cavia sp.&quot;                 
- [40] &quot;Cerdocyon thous&quot;            &quot;Chaetomys subspinosus&quot;      &quot;Chrysocyon brachyurus&quot;     
- [43] &quot;Coendou insidiosus&quot;         &quot;Coendou prehensilis&quot;        &quot;Coendou sp.&quot;               
- [46] &quot;Coendou spinosus&quot;           &quot;Conepatus chinga&quot;           &quot;Conepatus leuconotus&quot;      
- [49] &quot;Conepatus semistriatus&quot;     &quot;Conepatus sp.&quot;              &quot;Cuniculus paca&quot;            
- [52] &quot;Cyclopes didactylus&quot;        &quot;Dasyprocta azarae&quot;          &quot;Dasyprocta iacki&quot;          
- [55] &quot;Dasyprocta leporina&quot;        &quot;Dasyprocta sp.&quot;             &quot;Dasypus hybridus&quot;          
- [58] &quot;Dasypus novemcinctus&quot;       &quot;Dasypus septemcinctus&quot;      &quot;Dasypus sp.&quot;               
- [61] &quot;Dayprocta azarae&quot;           &quot;Didelphis albiventris&quot;      &quot;Didelphis aurita&quot;          
- [64] &quot;Didelphis sp.&quot;              &quot;Eira barbara&quot;               &quot;Equus cabalus&quot;             
- [67] &quot;Euphractus sexcinctus&quot;      &quot;Felis catus&quot;                &quot;Felis sp.&quot;                 
- [70] &quot;Galea spixii&quot;               &quot;Galictis cuja&quot;              &quot;Galictis sp.&quot;              
- [73] &quot;Galictis vittata&quot;           &quot;Gracilinanus agilis&quot;        &quot;Gracilinanus microtarsus&quot;  
- [76] &quot;Guerlinguetus brasiliensis&quot; &quot;Guerlinguetus sp.&quot;          &quot;Herpailurus yagouaroundi&quot;  
- [79] &quot;Hydrochoerus hydrochaeris&quot;  &quot;Juliomys pictipes&quot;          &quot;Leontopithecus chrysomelas&quot;
- [82] &quot;Leontopithecus chrysopygus&quot; &quot;Leopardus colocolo&quot;         &quot;Leopardus geoffroyi&quot;       
- [85] &quot;Leopardus guigna&quot;           &quot;Leopardus guttulus&quot;         &quot;Leopardus jacobita&quot;        
- [88] &quot;Leopardus pardalis&quot;         &quot;Leopardus sp.&quot;              &quot;Leopardus tigrinus&quot;        
- [91] &quot;Leopardus wiedii&quot;           &quot;Lepus capensis&quot;             &quot;Lepus europaeus&quot;           
- [94] &quot;Lontra canadensis&quot;          &quot;Lontra longicaudis&quot;         &quot;Lontra provocax&quot;           
- [97] &quot;Lontra sp.&quot;                 &quot;Lycalopex culpaeus&quot;         &quot;Lycalopex fulvipes&quot;        
-[100] &quot;Lycalopex griseus&quot;          &quot;Lycalopex gymnocercus&quot;      &quot;Lycalopex sechurae&quot;        
-[103] &quot;Lycalopex sp.&quot;              &quot;Lycalopex vetulus&quot;          &quot;Lyncodon patagonicus&quot;      
-[106] &quot;Lynx rufus&quot;                 &quot;Marmosa murina&quot;             &quot;Marmosops incanus&quot;         
-[109] &quot;Marmosops sp.&quot;              &quot;Mazama americana&quot;           &quot;Mazama bororo&quot;             
-[112] &quot;Mazama gouazoubira&quot;         &quot;Mazama nana&quot;                &quot;Mazama rufina&quot;             
-[115] &quot;Mazama sp.&quot;                 &quot;Mephitis macroura&quot;          &quot;Mephitis mephitis&quot;         
-[118] &quot;Mephitis sp.&quot;               &quot;Metachirus nudicaudatus&quot;    &quot;Monodelphis scalops&quot;       
-[121] &quot;Mustela africana&quot;           &quot;Mustela frenata&quot;            &quot;Mustela nigripes&quot;          
-[124] &quot;Myocastor coypus&quot;           &quot;Myrmecophaga tridactyla&quot;    &quot;Nasua narica&quot;              
-[127] &quot;Nasua nasua&quot;                &quot;Nasua sp.&quot;                  &quot;Nectomys squamipes&quot;        
-[130] &quot;Ozotocerus bezoarticus&quot;     &quot;Panthera onca&quot;              &quot;Pecari tajacu&quot;             
-[133] &quot;Philander frenatus&quot;         &quot;Philander opossum&quot;          &quot;Potos flavus&quot;              
-[136] &quot;Priodontes maximus&quot;         &quot;Procyon cancrivorus&quot;        &quot;Procyon lotor&quot;             
-[139] &quot;Procyon pygmaeus&quot;           &quot;Pteronura brasilienses&quot;     &quot;Pteronura brasiliensis&quot;    
-[142] &quot;Puma concolor&quot;              &quot;Puma sp.&quot;                   &quot;Puma yagouaroundi&quot;         
-[145] &quot;Sapajus apella&quot;             &quot;Sapajus cay&quot;                &quot;Sapajus libidinosus&quot;       
-[148] &quot;Sapajus nigritus&quot;           &quot;Sapajus nigritus cuculatus&quot; &quot;Sapajus robustus&quot;          
-[151] &quot;Sapajus xanthosternos&quot;      &quot;Sciurus aestuans&quot;           &quot;Sooretamys angouya&quot;        
-[154] &quot;Speothos venaticus&quot;         &quot;Sphiggurus insidiosus&quot;      &quot;Sphiggurus villosus&quot;       
-[157] &quot;Spilogale angustifrons&quot;     &quot;Spilogale gracilis&quot;         &quot;Spilogale putorius&quot;        
-[160] &quot;Spilogale pygmaea&quot;          &quot;Spilogale sp.&quot;              &quot;Sturnira lilium&quot;           
-[163] &quot;Sus scrofa&quot;                 &quot;Sylvilagus brasiliensis&quot;    &quot;Tamandua tetradactyla&quot;     
-[166] &quot;Tapirus terrestris&quot;         &quot;Taxidea taxus&quot;              &quot;Tayassu pecari&quot;            
-[169] &quot;Tremarctos ornatus&quot;         &quot;Trinomys dimidiatus&quot;        &quot;Trinomys iheringi&quot;         
-[172] &quot;Urocyon cinereoargenteus&quot;   &quot;Ursus americanus&quot;           &quot;Ursus arctos&quot;              
-[175] &quot;Vulpes macrotis&quot;           </code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB2ZXRvclxub2NjX3YgPC0gb2NjICU+JSBcbiAgICB0aWR5cjo6ZHJvcF9uYShsb25naXR1ZGUsIGxhdGl0dWRlKSAlPiUgXG4gICAgZHBseXI6Om11dGF0ZShsb24gPSBsb25naXR1ZGUsXG4gICAgICAgICAgICAgICAgICBsYXQgPSBsYXRpdHVkZSkgJT4lIFxuICAgIGRwbHlyOjpmaWx0ZXIobG9uID4gLTE4MCAmIGxvbiA8IDE4MCkgJT4lIFxuICAgIGRwbHlyOjpmaWx0ZXIobGF0ID4gLTkwICYgbGF0IDwgOTApICU+JSBcbiAgICBzZjo6c3RfYXNfc2YoY29vcmRzID0gYyhcImxvblwiLCBcImxhdFwiKSwgY3JzID0gNDMyNilcbm9jY192XG5cbnBsb3Qob2NjX3YkZ2VvbWV0cnksIHBjaCA9IDIwKVxuXG5gYGAifQ== -->
+<pre class="r"><code># vetor
+occ_v &lt;- occ %&gt;% 
+    tidyr::drop_na(longitude, latitude) %&gt;% 
+    dplyr::mutate(lon = longitude,
+                  lat = latitude) %&gt;% 
+    dplyr::filter(lon &gt; -180 &amp; lon &lt; 180) %&gt;% 
+    dplyr::filter(lat &gt; -90 &amp; lat &lt; 90) %&gt;% 
+    sf::st_as_sf(coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
+occ_v
+
+plot(occ_v$geometry, pch = 20)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFtaWZlcm9zIDwtIG9jY192XG5tYW1pZmVyb3MgPC0gbWFtaWZlcm9zICU+JVxuICBkcGx5cjo6ZmlsdGVyKFxuICAgIGZhbWlseSA9PSBcIkZlbGlkYWVcIlxuICApXG5cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwic3AuXCIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdXG5cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwiUGFudGhlcmEgb25jYVwiLCBtYW1pZmVyb3Mkc3BlY2llcyksXVxubWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoXCJQdW1hIGNvbmNvbG9yXCIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdXG5tYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbChcIkZlbGlzIGNhdHVzXCIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdXG5tYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbChcIkx5bnggcnVmdXNcIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF1cbm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKFwiTGVvcGFyZHVzIGd1aWduYVwiLCBtYW1pZmVyb3Mkc3BlY2llcyksXVxubWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoXCJMZW9wYXJkdXMgamFjb2JpdGFcIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF1cbm1hbWlmZXJvcyRzcGVjaWVzIDwtIGdzdWIoXCJQdW1hIHlhZ291YXJvdW5kaVwiLFwiSGVycGFpbHVydXMgeWFnb3Vhcm91bmRpXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIG1hbWlmZXJvcyRzcGVjaWVzKVxuc29ydCh1bmlxdWUob2NjX3Ykc3BlY2llcykpXG5zb3J0KHVuaXF1ZShtYW1pZmVyb3Mkc3BlY2llcykpXG5wbG90KG1hbWlmZXJvcyRnZW9tZXRyeSwgcGNoID0gMjApXG5cbmBgYCJ9 -->
+<pre class="r"><code>mamiferos &lt;- occ_v
+mamiferos &lt;- mamiferos %&gt;%
+  dplyr::filter(
+    family == &quot;Felidae&quot;
+  )
+
+mamiferos &lt;- mamiferos[!grepl(&quot;sp.&quot;, mamiferos$species),]
+
+mamiferos &lt;- mamiferos[!grepl(&quot;Panthera onca&quot;, mamiferos$species),]
+mamiferos &lt;- mamiferos[!grepl(&quot;Puma concolor&quot;, mamiferos$species),]
+mamiferos &lt;- mamiferos[!grepl(&quot;Felis catus&quot;, mamiferos$species),]
+mamiferos &lt;- mamiferos[!grepl(&quot;Lynx rufus&quot;, mamiferos$species),]
+mamiferos &lt;- mamiferos[!grepl(&quot;Leopardus guigna&quot;, mamiferos$species),]
+mamiferos &lt;- mamiferos[!grepl(&quot;Leopardus jacobita&quot;, mamiferos$species),]
+mamiferos$species &lt;- gsub(&quot;Puma yagouaroundi&quot;,&quot;Herpailurus yagouaroundi&quot;,
+                          mamiferos$species)
+sort(unique(occ_v$species))
+sort(unique(mamiferos$species))
+plot(mamiferos$geometry, pch = 20)
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -1876,7 +1856,7 @@ readr::write_csv(gatosBrasil, &quot;data/gatosBrasil.csv&quot;)
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQoNCmBgYHtyfQ0KIyBsYXJnZSBtYW1tYWxzDQphdF9sYXIgPC0gcmVhZHI6OnJlYWRfY3N2KCJkYXRhL2F0bGFudGljX2xhcmdlX21hbW1hbHMuY3N2IikNCmF0X2xhcg0KDQojIGNhbXRyYXANCmF0X2NhbSA8LSByZWFkcjo6cmVhZF9jc3YoImRhdGEvYXRsYW50aWNfY2FtdHJhcC5jc3YiKQ0KYXRfY2FtDQoNCiMgbmVvdHJvcGljYWwgY2Fybml2b3Jlcw0KbmVvX2NhciA8LSByZWFkcjo6cmVhZF9jc3YoImRhdGEvbmVvdHJvcGljYWxfY2Fybml2b3Jlcy5jc3YiKQ0KbmVvX2Nhcg0KDQojIGJpbmQNCm9jYyA8LSBkcGx5cjo6YmluZF9yb3dzKA0KICBhdF9jYW0sDQogIGF0X2xhciwNCiAgbmVvX2Nhcg0KICApICU+JQ0KICBkcGx5cjo6c2VsZWN0KC0xKSAlPiUgDQogICAgZHBseXI6OmRpc3RpbmN0KHNwZWNpZXMsIGxvbmdpdHVkZSwgbGF0aXR1ZGUsIC5rZWVwX2FsbCA9IFRSVUUpDQpvY2MNCg0KYGBgDQoNCg0KYGBge3J9DQojIHZldG9yDQpvY2NfdiA8LSBvY2MgJT4lIA0KICAgIHRpZHlyOjpkcm9wX25hKGxvbmdpdHVkZSwgbGF0aXR1ZGUpICU+JSANCiAgICBkcGx5cjo6bXV0YXRlKGxvbiA9IGxvbmdpdHVkZSwNCiAgICAgICAgICAgICAgICAgIGxhdCA9IGxhdGl0dWRlKSAlPiUgDQogICAgZHBseXI6OmZpbHRlcihsb24gPiAtMTgwICYgbG9uIDwgMTgwKSAlPiUgDQogICAgZHBseXI6OmZpbHRlcihsYXQgPiAtOTAgJiBsYXQgPCA5MCkgJT4lIA0KICAgIHNmOjpzdF9hc19zZihjb29yZHMgPSBjKCJsb24iLCAibGF0IiksIGNycyA9IDQzMjYpDQpvY2Nfdg0KDQpwbG90KG9jY192JGdlb21ldHJ5LCBwY2ggPSAyMCkNCg0KYGBgDQoNCmBgYHtyfQ0KbWFtaWZlcm9zIDwtIG9jY192DQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zICU+JQ0KICBkcGx5cjo6ZmlsdGVyKA0KICAgIGZhbWlseSA9PSAiRmVsaWRhZSINCiAgKQ0KDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgic3AuIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCg0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIlBhbnRoZXJhIG9uY2EiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIlB1bWEgY29uY29sb3IiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkZlbGlzIGNhdHVzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJMeW54IHJ1ZnVzIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJMZW9wYXJkdXMgZ3VpZ25hIiwgbWFtaWZlcm9zJHNwZWNpZXMpLF0NCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJMZW9wYXJkdXMgamFjb2JpdGEiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zJHNwZWNpZXMgPC0gZ3N1YigiUHVtYSB5YWdvdWFyb3VuZGkiLCJIZXJwYWlsdXJ1cyB5YWdvdWFyb3VuZGkiLA0KICAgICAgICAgICAgICAgICAgICAgICAgICBtYW1pZmVyb3Mkc3BlY2llcykNCnNvcnQodW5pcXVlKG9jY192JHNwZWNpZXMpKQ0Kc29ydCh1bmlxdWUobWFtaWZlcm9zJHNwZWNpZXMpKQ0KcGxvdChtYW1pZmVyb3MkZ2VvbWV0cnksIHBjaCA9IDIwKQ0KDQpgYGANCg0KYGBge3J9DQpicmFzaWwgPC0gc2Y6OnN0X3JlYWQoImRhdGEvZ2VvZGF0YS92ZXRvcl9Fc3RhZG9zQlJfTExXR1M4NC9Fc3RhZG9zQlJfSUJHRV9MTFdHUzg0LnNocCIpDQoNCmdhdG9zQnJhc2lsIDwtIG1hbWlmZXJvc1ticmFzaWwsIF0gJT4lIA0KICB0aWJibGU6OnJvd2lkX3RvX2NvbHVtbigpDQoNCnBsb3QoZ2F0b3NCcmFzaWwkZ2VvbWV0cnksIHBjaCA9IDIwKQ0KDQpnYXRvc0JyYXNpbCRnZW51cyA8LSB3b3JkKGdhdG9zQnJhc2lsJHNwZWNpZXMsMSkNCg0KdW5pcXVlKHNvcnQoZ2F0b3NCcmFzaWwkc3BlY2llcykpDQoNCnVuaXF1ZShzb3J0KGdhdG9zQnJhc2lsJGdlbnVzKSkNCg0KdW5pcXVlKHNvcnQoZ2F0b3NCcmFzaWwkZmFtaWx5KSkNCg0KdW5pcXVlKHNvcnQoZ2F0b3NCcmFzaWwkb3JkZXIpKQ0KDQpnYXRvc0JyYXNpbCA8LSBnYXRvc0JyYXNpbCAlPiUNCiAgZmlsdGVyKHllYXI+MTk5OSkNCg0KDQpgYGANCg0KYGBge3J9DQojIGV4cG9ydCBkYXRhDQpyZWFkcjo6d3JpdGVfY3N2KGdhdG9zQnJhc2lsLCAiZGF0YS9nYXRvc0JyYXNpbC5jc3YiKQ0KDQoNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk9yZ2FuaXphw6fDo28gZSBsaW1wZXphIC0gQcOnw6NvIDYuMSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCg0KYGBge3J9DQojIGxhcmdlIG1hbW1hbHMNCmF0X2xhciA8LSByZWFkcjo6cmVhZF9jc3YoImRhdGEvYXRsYW50aWNfbGFyZ2VfbWFtbWFscy5jc3YiKQ0KYXRfbGFyDQoNCiMgY2FtdHJhcA0KYXRfY2FtIDwtIHJlYWRyOjpyZWFkX2NzdigiZGF0YS9hdGxhbnRpY19jYW10cmFwLmNzdiIpDQphdF9jYW0NCg0KIyBuZW90cm9waWNhbCBjYXJuaXZvcmVzDQpuZW9fY2FyIDwtIHJlYWRyOjpyZWFkX2NzdigiZGF0YS9uZW90cm9waWNhbF9jYXJuaXZvcmVzLmNzdiIpDQpuZW9fY2FyDQoNCiMgYmluZA0Kb2NjIDwtIGRwbHlyOjpiaW5kX3Jvd3MoDQogIGF0X2NhbSwNCiAgYXRfbGFyLA0KICBuZW9fY2FyDQogICkgJT4lDQogIGRwbHlyOjpzZWxlY3QoLTEpICU+JSANCiAgICBkcGx5cjo6ZGlzdGluY3Qoc3BlY2llcywgbG9uZ2l0dWRlLCBsYXRpdHVkZSwgLmtlZXBfYWxsID0gVFJVRSkNCm9jYw0KDQpgYGANCg0KDQpgYGB7cn0NCiMgdmV0b3INCm9jY192IDwtIG9jYyAlPiUgDQogICAgdGlkeXI6OmRyb3BfbmEobG9uZ2l0dWRlLCBsYXRpdHVkZSkgJT4lIA0KICAgIGRwbHlyOjptdXRhdGUobG9uID0gbG9uZ2l0dWRlLA0KICAgICAgICAgICAgICAgICAgbGF0ID0gbGF0aXR1ZGUpICU+JSANCiAgICBkcGx5cjo6ZmlsdGVyKGxvbiA+IC0xODAgJiBsb24gPCAxODApICU+JSANCiAgICBkcGx5cjo6ZmlsdGVyKGxhdCA+IC05MCAmIGxhdCA8IDkwKSAlPiUgDQogICAgc2Y6OnN0X2FzX3NmKGNvb3JkcyA9IGMoImxvbiIsICJsYXQiKSwgY3JzID0gNDMyNikNCm9jY192DQoNCnBsb3Qob2NjX3YkZ2VvbWV0cnksIHBjaCA9IDIwKQ0KDQpgYGANCg0KYGBge3J9DQptYW1pZmVyb3MgPC0gb2NjX3YNCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3MgJT4lDQogIGRwbHlyOjpmaWx0ZXIoDQogICAgZmFtaWx5ID09ICJGZWxpZGFlIg0KICApDQoNCm1hbWlmZXJvcyA8LSBtYW1pZmVyb3NbIWdyZXBsKCJzcC4iLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiUGFudGhlcmEgb25jYSIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiUHVtYSBjb25jb2xvciIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3MgPC0gbWFtaWZlcm9zWyFncmVwbCgiRmVsaXMgY2F0dXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkx5bnggcnVmdXMiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkxlb3BhcmR1cyBndWlnbmEiLCBtYW1pZmVyb3Mkc3BlY2llcyksXQ0KbWFtaWZlcm9zIDwtIG1hbWlmZXJvc1shZ3JlcGwoIkxlb3BhcmR1cyBqYWNvYml0YSIsIG1hbWlmZXJvcyRzcGVjaWVzKSxdDQptYW1pZmVyb3Mkc3BlY2llcyA8LSBnc3ViKCJQdW1hIHlhZ291YXJvdW5kaSIsIkhlcnBhaWx1cnVzIHlhZ291YXJvdW5kaSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgIG1hbWlmZXJvcyRzcGVjaWVzKQ0Kc29ydCh1bmlxdWUob2NjX3Ykc3BlY2llcykpDQpzb3J0KHVuaXF1ZShtYW1pZmVyb3Mkc3BlY2llcykpDQpwbG90KG1hbWlmZXJvcyRnZW9tZXRyeSwgcGNoID0gMjApDQoNCmBgYA0KDQpgYGB7cn0NCmJyYXNpbCA8LSBzZjo6c3RfcmVhZCgiZGF0YS9nZW9kYXRhL3ZldG9yX0VzdGFkb3NCUl9MTFdHUzg0L0VzdGFkb3NCUl9JQkdFX0xMV0dTODQuc2hwIikNCg0KZ2F0b3NCcmFzaWwgPC0gbWFtaWZlcm9zW2JyYXNpbCwgXSAlPiUgDQogIHRpYmJsZTo6cm93aWRfdG9fY29sdW1uKCkNCg0KcGxvdChnYXRvc0JyYXNpbCRnZW9tZXRyeSwgcGNoID0gMjApDQoNCmdhdG9zQnJhc2lsJGdlbnVzIDwtIHdvcmQoZ2F0b3NCcmFzaWwkc3BlY2llcywxKQ0KDQp1bmlxdWUoc29ydChnYXRvc0JyYXNpbCRzcGVjaWVzKSkNCg0KdW5pcXVlKHNvcnQoZ2F0b3NCcmFzaWwkZ2VudXMpKQ0KDQp1bmlxdWUoc29ydChnYXRvc0JyYXNpbCRmYW1pbHkpKQ0KDQp1bmlxdWUoc29ydChnYXRvc0JyYXNpbCRvcmRlcikpDQoNCmdhdG9zQnJhc2lsIDwtIGdhdG9zQnJhc2lsICU+JQ0KICBmaWx0ZXIoeWVhcj4xOTk5KQ0KDQoNCmBgYA0KDQpgYGB7cn0NCiMgZXhwb3J0IGRhdGENCnJlYWRyOjp3cml0ZV9jc3YoZ2F0b3NCcmFzaWwsICJkYXRhL2dhdG9zQnJhc2lsLmNzdiIpDQoNCg0KYGBgDQoNCg==</div>
 
 
 
