@@ -112,7 +112,7 @@ ca_sp <- readr::read_csv(
     dplyr::filter(
         presence_absence == 1
         ) %>% 
-    # correct Potus flavus
+    # correction of Potus flavus
     dplyr::mutate(
         species_code = ifelse(
             species_code == "Potu_flav", "Poto_flav", species_code
@@ -283,20 +283,25 @@ gbif_lp <- readr::read_tsv(
     dplyr::filter(
         !is.na(decimalLongitude)
     ) %>%
+    # filter data from Brazil
     dplyr::filter(
         country == "Brasil" | country == "Brazil"
+    ) %>%
+    dplyr::filter(
+         year > 1999 & basisOfRecord == "Occurrence"
+    ) %>%
+    dplyr::mutate(
+        species = scientificName,
+        longitude = decimalLongitude,
+        latitude = decimalLatitude,
+        source = "GBIF.org (16 December 2022) GBIF Occurrence Download https://doi.org/10.15468/dl.9cen59"
     ) %>%
     # remove columns that only contain NA values
     dplyr::select(
         where(not_all_na)
+    ) 
+
+    dplyr::select(
+        family, genus, species, longitude, latitude, year, source
     )
-    
-
-problems()
-dplyr::filter(
-    family == "Felidae"
-  )
-
-sort(unique(gbif_lp$country))
-    
 ```
