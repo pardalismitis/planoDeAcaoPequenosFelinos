@@ -57,11 +57,12 @@ unzip(
 # import sites
 ca_si <- readr::read_csv(
     "data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv"
-    ) %>% 
+    ) %>%
+    # select only id and coordinates
     dplyr::select(
         location_id, X, Y
         )
-ca_si
+#ca_si
 ```
 
 ### Importar as amostragens
@@ -70,15 +71,17 @@ ca_si
 ca_si_na <- readr::read_csv(
     "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv"
     ) %>% 
+    # join sites names with coordinates
     dplyr::left_join(
         .,
         ca_si,
         by = "location_id"
         ) %>% 
+    # select only ids, year and coordinates
     dplyr::select(
         location_id, survey_id, yearfinish,  X, Y
         )
-ca_si_na
+#ca_si_na
 ```
 
 ### Importar os nomes das espécies
@@ -86,59 +89,68 @@ ca_si_na
 # import species names
 ca_sp_na <- readr::read_csv(
     "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv"
-    ) %>% 
+    ) %>%
+    # remove unnecessary columns
     dplyr::select(
         order:genus, species_name, species_code
         )
-ca_sp_na
+#ca_sp_na
 
 ```
 
 ### Importar registros
 ```{r}
-# import species
+# import records
 ca_sp <- readr::read_csv(
     "data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv"
     ) %>% 
+    # remove unnecessary columns
     dplyr::select(
         survey_id, species_code, presence_absence
         ) %>% 
+    # remove absences
     dplyr::filter(
         presence_absence == 1
         ) %>% 
+    # correct Potus flavus
     dplyr::mutate(
         species_code = ifelse(
             species_code == "Potu_flav", "Poto_flav", species_code
             )
         ) %>% 
+    # join with taxonomy information
     dplyr::left_join(
         ., ca_sp_na, by = "species_code"
         ) %>% 
+    # remove unnacessary columns
     dplyr::select(
         -c(
             presence_absence,  species_code
             )
         )
-ca_sp
+#ca_sp
 ```
 
 ### Integrar informações
 ```{r}
-# join data
+# join spatial data
 ca_occ <- ca_sp %>% 
     dplyr::left_join(
         ca_si_na, by = "survey_id"
         ) %>% 
+    # rename columns
     dplyr::mutate(species = species_name,
                   longitude = as.numeric(X), 
                   latitude = as.numeric(Y), 
                   year = as.numeric(yearfinish),
                   source = "atlantic_camtrap") %>%
+    #remove unnecessary columns
     dplyr::select(
         order:genus, species, longitude, latitude, year, source
         ) %>% 
+    # add id
     tibble::rowid_to_column()
-ca_occ
+#ca_occ
 ```
 
 ### Exportar
