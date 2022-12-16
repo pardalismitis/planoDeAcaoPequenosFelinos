@@ -122,6 +122,30 @@ ca_sp <- readr::read_csv(
 ca_sp
 ```
 
+### GBIF
+```{r}
+# remove columns that only contain NA values
+not_all_na <- function(x) any(!is.na(x))
+
+gbif_lp <- readr::read_tsv(
+    "data/GBIF_leopardusPardalis/verbatim.txt"
+    ) %>%
+    # filter data without coordinates
+    dplyr::filter(
+        !is.na(verbatimLatitude)
+    ) %>%
+    dplyr::filter(
+        !is.na(verbatimLongitude)
+    ) %>%
+    # remove columns that only contain NA values
+    dplyr::select(
+        where(not_all_na)
+    )
+    
+    
+```
+
+
 ### Integrar informações
 ```{r}
 # join data
