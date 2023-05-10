@@ -3,26 +3,26 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-
 ```{r}
-# large mammals
+# carregar dados do Atlantic Large Mammals
 at_lar <- readr::read_csv("data/atlantic_large_mammals.csv")
 at_lar
 
-# camtrap
+# Carregar dados do Atlantic Camtraps
 at_cam <- readr::read_csv("data/atlantic_camtrap.csv")
 at_cam
 
-# neotropical carnivores
+# Carregar dados do Neotropical Carnivores
 neo_car <- readr::read_csv("data/neotropical_carnivores.csv")
 neo_car
 
-# bind
+# Junte os dados
 occ <- dplyr::bind_rows(
   at_cam,
   at_lar,
   neo_car
   ) %>%
+  # Selecione apenas os campos de interesse sem repetição
   dplyr::select(-1) %>% 
     dplyr::distinct(species, longitude, latitude, .keep_all = TRUE)
 occ
@@ -67,6 +67,31 @@ sort(unique(mamiferos$species))
 plot(mamiferos$geometry, pch = 20)
 
 ```
+
+```{r}
+jaguarundi <- occ_v
+
+jaguarundi$species <- gsub("Puma yagouaroundi","Herpailurus yagouaroundi",
+                          jaguarundi$species)
+
+jaguarundi <- jaguarundi %>%
+  dplyr::filter(
+    species == "Herpailurus yagouaroundi"
+  )
+
+sort(unique(jaguarundi$species))
+plot(jaguarundi$geometry, pch = 20)
+
+```
+
+```{r}
+# export data
+readr::write_csv(jaguarundi, "data/herpailurusYagouaroundi.csv")
+
+```
+
+
+
 
 ```{r}
 brasil <- sf::st_read("data/geodata/vetor_EstadosBR_LLWGS84/EstadosBR_IBGE_LLWGS84.shp")
