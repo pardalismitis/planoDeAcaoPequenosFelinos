@@ -24,7 +24,7 @@ occ <- dplyr::bind_rows(
   ) %>%
   # Selecione apenas os campos de interesse sem repetição
   dplyr::select(-1) %>% 
-    dplyr::distinct(species, longitude, latitude, .keep_all = TRUE)
+    dplyr::distinct(species, longitude, latitude, study, .keep_all = TRUE)
 occ
 
 ```
