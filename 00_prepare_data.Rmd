@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Preparação de dados - Ação 6.1"
 output: html_notebook
 ---
 
@@ -7,22 +7,68 @@ output: html_notebook
 library(tidyverse)
 ```
 
-
 ```{r}
 # options
 options(timeout = 1e6)
 sf::sf_use_s2(FALSE)
 ```
 
+#### Importar dados
 ```{r}
-# import sites
-ca_si <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv") %>% 
-    dplyr::select(location_id, X, Y)
-ca_si
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/atlantic_camtrap.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/atlantic_camtrap.zip",
+    exdir = "data/data_papers"
+    )
 ```
 
 ```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/atlantic_large_mammals.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/atlantic_large_mammals.zip",
+    exdir = "data/data_papers"
+    )
+```
+
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/neotropical_carnivores.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/neotropical_carnivores.zip",
+    exdir = "data/data_papers"
+    )
+```
+
+## Atlantic-Camtraps
+
+### Importar os sites
+```{r}
+# import sites
+ca_si <- readr::read_csv(
+    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv"
+    ) %>%
+    # select only id and coordinates
+    dplyr::select(
+        location_id, X, Y
+        )
+#ca_si
+```
+
+### Importar as amostragens
+```{r}
 # import sites names
+<<<<<<< HEAD
 ca_si_na <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv") %>% 
     dplyr::left_join(., ca_si, by = "location_id") %>% 
     dplyr::select(study_id, location_id, survey_id, yearfinish,  X, Y)
@@ -39,41 +85,102 @@ ca_st_na
 
 
 
+=======
+ca_si_na <- readr::read_csv(
+    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv"
+    ) %>% 
+    # join sites names with coordinates
+    dplyr::left_join(
+        .,
+        ca_si,
+        by = "location_id"
+        ) %>% 
+    # select only ids, year and coordinates
+    dplyr::select(
+        location_id, survey_id, yearfinish,  X, Y
+        )
+#ca_si_na
+```
+
+### Importar os nomes das espécies
+>>>>>>> e300806126eec18c8719af5faba6fee239236f58
 ```{r}
 # import species names
-ca_sp_na <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv") %>% 
-    dplyr::select(order:genus, species_name, species_code)
-ca_sp_na
+ca_sp_na <- readr::read_csv(
+    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv"
+    ) %>%
+    # remove unnecessary columns
+    dplyr::select(
+        order:genus, species_name, species_code
+        )
+#ca_sp_na
 
 ```
 
-
+### Importar registros
 ```{r}
-# import species
-ca_sp <- readr::read_csv("data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv") %>% 
-    dplyr::select(survey_id, species_code, presence_absence) %>% 
-    dplyr::filter(presence_absence == 1) %>% 
-    dplyr::mutate(species_code = ifelse(species_code == "Potu_flav", "Poto_flav", species_code)) %>% 
-    dplyr::left_join(., ca_sp_na, by = "species_code") %>% 
-    dplyr::select(-c(presence_absence,  species_code))
-ca_sp
+# import records
+ca_sp <- readr::read_csv(
+    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv"
+    ) %>% 
+    # remove unnecessary columns
+    dplyr::select(
+        survey_id, species_code, presence_absence
+        ) %>% 
+    # remove absences
+    dplyr::filter(
+        presence_absence == 1
+        ) %>% 
+    # correction of Potus flavus
+    dplyr::mutate(
+        species_code = ifelse(
+            species_code == "Potu_flav", "Poto_flav", species_code
+            )
+        ) %>% 
+    # join with taxonomy information
+    dplyr::left_join(
+        ., ca_sp_na, by = "species_code"
+        ) %>% 
+    # remove unnacessary columns
+    dplyr::select(
+        -c(
+            presence_absence,  species_code
+            )
+        )
+#ca_sp
 ```
 
+### Integrar informações
 ```{r}
-# join data
+# join spatial data
 ca_occ <- ca_sp %>% 
+<<<<<<< HEAD
     dplyr::left_join(ca_st_na, by = "survey_id") %>% 
+=======
+    dplyr::left_join(
+        ca_si_na, by = "survey_id"
+        ) %>% 
+    # rename columns
+>>>>>>> e300806126eec18c8719af5faba6fee239236f58
     dplyr::mutate(species = species_name,
                   longitude = as.numeric(X), 
                   latitude = as.numeric(Y), 
                   year = as.numeric(yearfinish),
                   source = "atlantic_camtrap") %>%
+<<<<<<< HEAD
     dplyr::select(order:genus, species, longitude, latitude, year, source, study) %>% 
+=======
+    #remove unnecessary columns
+    dplyr::select(
+        order:genus, species, longitude, latitude, year, source
+        ) %>% 
+    # add id
+>>>>>>> e300806126eec18c8719af5faba6fee239236f58
     tibble::rowid_to_column()
-ca_occ
+#ca_occ
 ```
 
-
+### Exportar
 ```{r}
 # export data
 readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
@@ -81,36 +188,62 @@ readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 
 ## Atlantic Large Mammals
 
+### Importar dados
 ```{r}
 # import data
-lm_occ <- readr::read_csv("data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv") %>% 
-    dplyr::mutate(genus = str_split(Actual_species_Name, " ", simplify = TRUE)[, 1],
-                  species = Actual_species_Name,
-                  longitude = as.numeric(Longitude), 
-                  latitude = as.numeric(Latitude), 
-                  year = as.numeric(Year_finish),
-                  source = "atlantic_large_mammals") %>%
-    dplyr::select(genus, species, longitude, latitude, year, source) %>% 
-    tidyr::drop_na(longitude, latitude) %>% 
-    dplyr::mutate(species = str_trim(species)) %>% 
+lm_occ <- readr::read_csv(
+    "data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"
+    ) %>% 
+    dplyr::mutate(
+        genus = str_split(Actual_species_Name, " ", simplify = TRUE)[, 1],
+        species = Actual_species_Name,
+        longitude = as.numeric(Longitude), 
+        latitude = as.numeric(Latitude), 
+        year = as.numeric(Year_finish),
+        source = "atlantic_large_mammals"
+        ) %>%
+    dplyr::select(
+        genus, species, longitude, latitude, year, source
+        ) %>% 
+    tidyr::drop_na(
+        longitude, latitude
+        ) %>% 
+    dplyr::mutate(
+        species = str_trim(species)
+        ) %>% 
     tibble::rowid_to_column() %>% 
-    dplyr::left_join(., rbind(unique(ca_occ[, c(2, 3, 4)])), by = "genus") %>% 
-    dplyr::relocate(order:family, .before = 2)
+    dplyr::left_join(
+        .,
+        rbind(
+            unique(
+                ca_occ[, c(2, 3, 4)]
+                )
+            ),
+        by = "genus"
+        ) %>% 
+    dplyr::relocate(
+        order:family,
+        .before = 2
+        )
 lm_occ
 ```
 
+### Exportar
 ```{r}
 # export data
 readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
-
 ```
 
 ## Neotropical Carnivores
 
+### Importar dados
 ```{r}
 # import
 neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv")
+```
 
+### Filtrar registros duvidosos
+```{r}
 neo_car_occ <- neo_car_occ[!grepl("Informal interview", neo_car_occ$TYPE_REC),]
 neo_car_occ <- neo_car_occ[!grepl("Interview", neo_car_occ$TYPE_REC),]
 neo_car_occ <- neo_car_occ[!grepl("Scratch", neo_car_occ$TYPE_REC),]
@@ -132,17 +265,70 @@ neo_car_occ <- neo_car_occ %>%
                   latitude = LAT_Y,
                   year = as.numeric(COL_END_YR),
                   source = "neotropical_carnivores") %>%
-    dplyr::select(family, genus, species, longitude, latitude, year, source) %>% 
-    dplyr::mutate(species = str_trim(species)) %>% 
+    dplyr::select(
+        family, genus, species, longitude, latitude, year, source
+        ) %>% 
+    dplyr::mutate(
+        species = str_trim(species)
+        ) %>% 
     tibble::rowid_to_column() %>% 
-    dplyr::left_join(., unique(rbind(ca_occ[, c(2, 4)], lm_occ[, c(2, 4)])), by = "genus") %>% 
-    dplyr::relocate(order, .after = 1)
+    dplyr::left_join(
+        .,
+        unique(
+            rbind(
+                ca_occ[, c(2, 4)],
+                lm_occ[, c(2, 4)]
+                )
+            ),
+        by = "genus"
+        ) %>% 
+    dplyr::relocate(
+        order, .after = 1
+        )
 neo_car_occ
 ```
 
+### Exportar
 ```{r}
 # export data
 readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
 
 ```
 
+## GBIF
+```{r}
+# remove columns that only contain NA values
+not_all_na <- function(x) any(!is.na(x))
+
+gbif_lp <- readr::read_tsv(
+    "data/GBIF_leopardusPardalis/verbatim.txt"
+    ) %>%
+    # filter data without coordinates
+    dplyr::filter(
+        !is.na(decimalLatitude)
+    ) %>%
+    dplyr::filter(
+        !is.na(decimalLongitude)
+    ) %>%
+    # filter data from Brazil
+    dplyr::filter(
+        country == "Brasil" | country == "Brazil"
+    ) %>%
+    dplyr::filter(
+         year > 1999 & basisOfRecord == "Occurrence"
+    ) %>%
+    dplyr::mutate(
+        species = scientificName,
+        longitude = decimalLongitude,
+        latitude = decimalLatitude,
+        source = "GBIF.org (16 December 2022) GBIF Occurrence Download https://doi.org/10.15468/dl.9cen59"
+    ) %>%
+    # remove columns that only contain NA values
+    dplyr::select(
+        where(not_all_na)
+    ) 
+
+    dplyr::select(
+        family, genus, species, longitude, latitude, year, source
+    )
+```
