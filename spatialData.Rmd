@@ -10,24 +10,39 @@ library(dplyr)
 
 jaguarundi <- read.csv("data/herpailurusYagouaroundi.csv")
 shapefile <- st_read("data/geodata/LatinAmerica.shp")
+ucs <- st_read("data/geodata/ucstodas_WGS1.shp")
 
-is_valid <- st_is_valid(shapefile)
-
-shapefile <- st_make_valid(shapefile)
+st_crs(jaguarundi_sf)
+st_crs(ucs)
 
 
 
 jaguarundi_sf <- st_as_sf(jaguarundi, coords = c("longitude", "latitude"), crs = 4326)
-joined_data <- st_join(jaguarundi_sf, shapefile)
+joined_data <- st_join(jaguarundi_sf, ucs)
 
 
 
-locality <- joined_data$CNTRY_NAME
+UC <- joined_data$NOME_UC1
 
 jaguarundi <- jaguarundi %>%
-  mutate(Country = locality)
+  mutate(UC = UC)
 
 
+install.packages("openxlsx")
+library(openxlsx)
+
+
+ #Create a new workbook
+wb <- createWorkbook()
+
+# Add a worksheet to the workbook
+addWorksheet(wb, "Sheet1")
+
+# Write the data frame to the worksheet
+writeData(wb, sheet = 1, jaguarundi, startRow = 1, startCol = 1)
+
+# Save the workbook as an XLSX file
+saveWorkbook(wb, "data/herpailurusYagouaroundi.xlsx")
 
 ```
 
