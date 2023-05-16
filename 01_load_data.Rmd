@@ -68,26 +68,49 @@ plot(mamiferos$geometry, pch = 20)
 
 ```
 
+The code first modifies the "species" column, replacing "Puma yagouaroundi" with "Herpailurus yagouaroundi". Then, it adds the columns "order", "family", and "genus" with the specified values. Finally, it modifies the "Observation" column, replacing "cam_trap" with "Camera Trapping" and "Photo" with "Picture/Video". The resulting dataframe is filtered to include only rows where the species is "Herpailurus yagouaroundi" and the year is greater than 2002. The modified dataframe is stored back in the jaguarundi variable.
+
+the case_when() function is used to specify the conditions for replacing values in the "Observation" column. The ~ symbol indicates the replacement value. The TRUE ~ Observation statement is used as the default case, which means that if none of the specified conditions match, the original value will be retained.
+    
+
 ```{r}
 jaguarundi <- occ_v
 
-jaguarundi$species <- gsub("Puma yagouaroundi","Herpailurus yagouaroundi",
-                          jaguarundi$species)
-
 jaguarundi <- jaguarundi %>%
-  dplyr::filter(
-    species == "Herpailurus yagouaroundi"
-  ) %>%
-  dplyr::filter(
-    year > 2002
-  ) %>%
-  dplyr::mutate(
+  mutate(
+    species = gsub("Puma yagouaroundi", "Herpailurus yagouaroundi", species),
     order = "Carnivora",
     family = "Felidae",
-    genus = "Herpailurus"
+    genus = "Herpailurus",
+    Observation = gsub("cam_trap", "Camera Trapping", Observation),
+    Observation = gsub("line_transect|mixed_method", "Direct Sighting", Observation),
+    Observation = gsub("vehicles", "Roadkill", Observation),
+    Observation = case_when(
+      Observation %in% c("Photo", "Photo, Video", "Video") ~ "Picture/Video",
+      TRUE ~ Observation
+    ),
+    SCALP = ifelse(
+      Observation %in% c("Camera Trapping", "Capture", "Picture/Video"),
+      "C1",
+      ifelse(
+        Observation %in% c("Carcass", "Roadkill", "Specimen"),
+        "C2",
+        ifelse(
+          Observation == "Direct Sighting",
+          "C3",
+          Observation
+        )
+      )
+    ),
+    study = ifelse(is.na(study), "Unpublished data", study)
+  ) %>%
+  filter(
+    species == "Herpailurus yagouaroundi",
+    year > 2002
   )
 
-sort(unique(jaguarundi$species))
+sort(unique(jaguarundi$Observation))
+sort(unique(jaguarundi$SCALP))
 plot(jaguarundi$geometry, pch = 20)
 
 ```
