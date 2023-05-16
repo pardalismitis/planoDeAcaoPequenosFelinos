@@ -109,6 +109,9 @@ jaguarundi <- jaguarundi %>%
     year > 2002
   )
 
+
+
+
 sort(unique(jaguarundi$Observation))
 sort(unique(jaguarundi$SCALP))
 plot(jaguarundi$geometry, pch = 20)
