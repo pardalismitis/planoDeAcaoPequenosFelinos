@@ -121,10 +121,12 @@ ca_occ <- ca_sp %>%
                   longitude = as.numeric(X), 
                   latitude = as.numeric(Y), 
                   year = as.numeric(yearfinish),
+                  Observation = "Camera Trapping",
+                  SCALP = "C1",
                   source = "atlantic_camtrap") %>%
     #remove unnecessary columns
     dplyr::select(
-        order:genus, species, longitude, latitude, year, source, study
+        order:genus, species, longitude, latitude, year, source, Observation, SCALP, study
         ) %>% 
     # add id
     tibble::rowid_to_column()
@@ -151,11 +153,13 @@ lm_occ <- readr::read_csv(
         longitude = as.numeric(Longitude), 
         latitude = as.numeric(Latitude), 
         year = as.numeric(Year_finish),
+        Observation = Method,
+        SCALP = "C1",
         study = Reference, 
         source = "atlantic_large_mammals"
         ) %>%
     dplyr::select(
-        genus, species, longitude, latitude, year, source, study
+        genus, species, longitude, latitude, year, source, Observation, SCALP, study
         ) %>% 
     tidyr::drop_na(
         longitude, latitude
@@ -177,6 +181,12 @@ lm_occ <- readr::read_csv(
         order:family,
         .before = 2
         )
+
+lm_occ <- lm_occ[!grepl("sand_plot", lm_occ$Observation),]
+lm_occ <- lm_occ[!grepl("mixed_method", lm_occ$Observation),]
+
+sort(unique(lm_occ$Observation ))
+
 lm_occ
 ```
 
@@ -205,6 +215,7 @@ neo_car_occ <- neo_car_occ[!grepl("Vocalization", neo_car_occ$TYPE_REC),]
 neo_car_occ <- neo_car_occ[!grepl("Track", neo_car_occ$TYPE_REC),]
 neo_car_occ <- neo_car_occ[!grepl("Sighting", neo_car_occ$TYPE_REC),]
 neo_car_occ <- neo_car_occ[!grepl("Literature review", neo_car_occ$TYPE_REC),]
+neo_car_occ <- neo_car_occ[!grepl("Tissue", neo_car_occ$TYPE_REC),]
 
 sort(unique(neo_car_occ$TYPE_REC))
 
@@ -219,10 +230,12 @@ neo_car_occ <- neo_car_occ %>%
                   longitude = LONG_X, 
                   latitude = LAT_Y,
                   year = as.numeric(COL_END_YR),
+                  Observation = TYPE_REC,
+                  SCALP = "C1",
                   study = REFERENCE,
                   source = "neotropical_carnivores") %>%
     dplyr::select(
-        family, genus, species, longitude, latitude, year, source, study
+        family, genus, species, longitude, latitude, year, Observation, SCALP, source, study
         ) %>% 
     dplyr::mutate(
         species = str_trim(species)
