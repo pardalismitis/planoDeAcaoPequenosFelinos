@@ -8,8 +8,8 @@ install.packages("sf")
 library(sf)
 library(dplyr)
 
-csv_data <- read.csv("data/herpailurusYagouaroundi.csv")
-shapefile <- st_read("data/geodata/WDPA.shp")
+jaguarundi <- read.csv("data/herpailurusYagouaroundi.csv")
+shapefile <- st_read("data/geodata/LatinAmerica.shp")
 
 is_valid <- st_is_valid(shapefile)
 
@@ -17,15 +17,15 @@ shapefile <- st_make_valid(shapefile)
 
 
 
-csv_data_sf <- st_as_sf(csv_data, coords = c("longitude", "latitude"), crs = 4326)
-joined_data <- st_join(csv_data_sf, shapefile)
+jaguarundi_sf <- st_as_sf(jaguarundi, coords = c("longitude", "latitude"), crs = 4326)
+joined_data <- st_join(jaguarundi_sf, shapefile)
 
 
 
-locality <- joined_data$NAME
+locality <- joined_data$CNTRY_NAME
 
-csv_data <- csv_data %>%
-  mutate(Locality = locality)
+jaguarundi <- jaguarundi %>%
+  mutate(Country = locality)
 
 
 
