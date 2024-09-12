@@ -1,0 +1,299 @@
+---
+title: "Pequenos Felinos"
+author: "Fernando Lima, D.Sc."
+output: html_notebook
+---
+
+Limpeza de dados para lista de espécies de mamíferos terrestres. Dados brutos integrados por Maurício Vancine.
+
+Dados de entrada e saída desse script disponíveis no [Github](https://github.com/pardalismitis/planoDeAcaoPequenosFelinos).
+
+```{r}
+rm(list = ls(all = TRUE))
+library(here)
+library(stringr)
+library(dbplyr)
+```
+
+### ATLANTIC CAMTRAPS
+
+#### Importar dados
+```{r}
+# prepare data papers ------------------------------------------------------------
+
+#' here i prepare the data from mammals data papers. these data are not available
+# download data
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+              "data/data_papers/atlantic_camtrap.zip", mode = "wb")
+
+ unzip
+unzip(zipfile = "data/data_papers/atlantic_camtrap.zip", exdir = "data/data_papers")
+```
+
+#### Leitura das planilhas
+```{r}
+# import sites
+ca_si <- readr::read_csv(
+  "data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv"
+  ) %>%
+  dplyr::select(location_id, X, Y)
+#ca_si
+
+# import sites names
+ca_si_na <- readr::read_csv(
+  "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv"
+  ) %>% 
+    dplyr::left_join(
+      ., ca_si, by = "location_id"
+      ) %>% 
+    dplyr::select(
+      location_id,
+      survey_id,
+      yearfinish,
+      X,
+      Y
+      )
+#ca_si_na
+
+# import species names
+ca_sp_na <- readr::read_csv(
+  "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv"
+  ) %>% 
+    dplyr::select(
+      order:
+        genus,
+      species_name,
+      species_code
+      )
+#ca_sp_na
+
+# import species
+ca_sp <- readr::read_csv(
+  "data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv"
+  ) %>% 
+    dplyr::select(
+      survey_id,
+      species_code,
+      presence_absence
+      ) %>% 
+    dplyr::filter(
+      presence_absence == 1
+      ) %>% 
+    dplyr::left_join(
+      ., ca_sp_na, by = "species_code"
+      ) %>% 
+    dplyr::select(
+      -c(presence_absence,
+         species_code)
+      )
+#ca_sp
+```
+
+#### Agrupar dados
+```{r}
+# join data
+ca_occ <- ca_sp %>% 
+    dplyr::left_join(
+      ca_si_na, by = "survey_id"
+      ) %>% 
+    dplyr::mutate(
+      species = species_name,
+      longitude = as.numeric(X),
+      latitude = as.numeric(Y),
+      year = as.numeric(yearfinish),
+      source = "atlantic_camtrap"
+      ) %>%
+    dplyr::select(
+      order:genus,
+      species,
+      longitude,
+      latitude,
+      year,
+      source
+      ) %>% 
+    tibble::rowid_to_column()
+#ca_occ
+```
+
+#### Salvar arquivo
+```{r}
+# export data
+readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
+```
+
+### ATLANTIC LARGE MAMMALS
+
+#### Importar dados
+```{r}
+#download.file(
+#url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+#destfile = "data/data_papers/atlantic_large_mammals.zip",
+#mode = "wb"
+#)
+
+#unzip(
+#zipfile = "data/data_papers/atlantic_large_mammals.zip",
+#exdir = "data/data_papers"
+#)
+```
+
+#### Leitura de dados
+```{r}
+lm_occ <- readr::read_csv(
+  "data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"
+  ) %>% 
+    dplyr::mutate(
+      genus = str_split(
+        Actual_species_Name,
+        " ",
+        simplify = TRUE
+        )
+      [, 1],
+      species = Actual_species_Name,
+      longitude = as.numeric(Longitude),
+      latitude = as.numeric(Latitude),
+      year = as.numeric(Year_finish),
+      source = "atlantic_large_mammals"
+      ) %>%
+    dplyr::select(
+      genus,
+      species,
+      longitude,
+      latitude,
+      year,
+      source
+      ) %>% 
+    tidyr::drop_na(
+      longitude,
+      latitude
+      ) %>% 
+    dplyr::mutate(
+      species = str_trim(species)
+      ) %>% 
+    tibble::rowid_to_column() %>% 
+    dplyr::left_join(
+      .,
+      rbind(
+        unique(
+          ca_occ[, c(2, 3, 4)]
+          )
+        ),
+      by = "genus"
+      ) %>% 
+    dplyr::relocate(
+      order:family,
+      .before = 2
+      )
+#lm_occ
+```
+
+#### Salvar arquivo
+```{r}
+readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
+```
+
+### ATLANTIC CARNIVORES
+
+Importar dados
+```{r}
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+ #             destfile = "data/data_papers/neotropical_carnivores.zip", mode = "wb")
+
+# unzip
+#unzip(zipfile = "data/data_papers/neotropical_carnivores.zip", exdir = "data/data_papers")
+
+# import
+neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv") %>% 
+    dplyr::mutate(family = FAMILY,
+                  genus = GENUS,
+                  species = SPECIES,
+                  name = SPECIES, 
+                  longitude = LONG_X, 
+                  latitude = LAT_Y,
+                  year = as.numeric(COL_END_YR),
+                  source = "neotropical_carnivores") %>%
+    dplyr::select(family, genus, species, longitude, latitude, year, source) %>% 
+    dplyr::mutate(species = str_trim(species)) %>% 
+    tibble::rowid_to_column() %>% 
+    dplyr::left_join(., unique(rbind(ca_occ[, c(2, 4)], lm_occ[, c(2, 4)])), by = "genus") %>% 
+    dplyr::relocate(order, .after = 1)
+neo_car_occ
+
+# export data
+readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
+
+```
+
+
+
+
+SELEÇÃO DE GATÍNEOS
+
+```{r}
+mamiferos <- occ_v
+mamiferos <- mamiferos %>%
+  dplyr::filter(
+    family == "Felidae"
+      
+    )
+```
+
+
+
+SELEÇÃO DE GATÍNEOS
+
+Exclusão de registros nada a ver.
+```{r}
+mamiferos <- mamiferos[!grepl("sp.", mamiferos$species),]
+
+sort(unique(mamiferos$species))
+
+mamiferos <- mamiferos[!grepl("Panthera onca", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Puma concolor", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Felis catus", mamiferos$species),]
+```
+
+Correção de taxonomia
+```{r}
+mamiferos$species <- gsub("Puma yagouaroundi","Herpailurus yagouaroundi",
+                          mamiferos$species)
+
+mamiferos$family <- gsub("Felídeos","Felidae", mamiferos$family)
+```
+
+Remover exóticas/invasoras/domésticas
+```{r}
+mamiferos <- mamiferos[!grepl("Bos taurus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Callithrix jacchus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Callithrix penicillata", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Canis familiaris", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Felis catus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Lepus capensis", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Lepus europaeus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Rattus norvegicus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Rattus rattus", mamiferos$species),]
+mamiferos <- mamiferos[!grepl("Sus scrofa", mamiferos$species),]
+```
+
+Pegar o gênero
+```{r}
+sort(unique(mamiferos$genus))
+mamiferos$genus <- word(mamiferos$species,1)
+```
+
+Checagem
+```{r}
+unique(sort(mamiferos$species))
+
+unique(sort(mamiferos$genus))
+
+unique(sort(mamiferos$family))
+
+unique(sort(mamiferos$order))
+```
+
+Exportar arquivo
+```{r}
+write.csv(mamiferos, "occ_v_sp.csv")
+```
+
