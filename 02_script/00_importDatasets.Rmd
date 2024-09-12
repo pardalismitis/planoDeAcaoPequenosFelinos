@@ -1,0 +1,62 @@
+---
+title: "PAN PEQUENOS FELINOS"
+subtitle: "Ação 6.1."
+author: 'Desenvolvimento: Fernando Lima, D.Sc.'
+knit: (function(input, ...) {rmarkdown::render(input, output_dir=paste0(rprojroot::find_rstudio_root_file(), "/02_script/01_limpezaEOrganizacao/outputs/"))})
+output:
+  pdf_document:
+---
+
+Importação de dados (se necessário)
+
+## PREPARAÇÃO
+
+### PACOTES
+
+```{r pacotes, message=FALSE, warning=FALSE}
+rm(list = ls(all = TRUE))
+source("../funcoes/pacotes.R")
+pacotes("here", "tidyverse")
+```
+
+### ATLANTIC CAMTRAPS
+
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/atlantic_camtrap.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/atlantic_camtrap.zip",
+    exdir = "data/data_papers"
+    )
+```
+
+### ATLANTIC LARGE MAMMALS
+
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/atlantic_large_mammals.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/atlantic_large_mammals.zip",
+    exdir = "data/data_papers"
+    )
+```
+
+### NEOTROPICAL CARNIVORES
+
+```{r}
+download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+              destfile = "data/data_papers/neotropical_carnivores.zip",
+              mode = "wb"
+              )
+
+unzip(
+    zipfile = "data/data_papers/neotropical_carnivores.zip",
+    exdir = "data/data_papers"
+    )
+```
