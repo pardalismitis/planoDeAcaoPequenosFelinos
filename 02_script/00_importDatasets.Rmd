@@ -15,21 +15,21 @@ Importação de dados (se necessário)
 
 ```{r pacotes, message=FALSE, warning=FALSE}
 rm(list = ls(all = TRUE))
-source("../funcoes/pacotes.R")
-pacotes("here", "tidyverse")
+source("funcoes/pacotes.R")
+pacotes("here", "tidyverse", "httr")
 ```
 
 ### ATLANTIC CAMTRAPS
 
 ```{r}
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
-              destfile = "data/data_papers/atlantic_camtrap.zip",
+              destfile = "../01_input/data_papers/atlantic_camtrap.zip",
               mode = "wb"
               )
 
 unzip(
-    zipfile = "data/data_papers/atlantic_camtrap.zip",
-    exdir = "data/data_papers"
+    zipfile = "../01_input/data_papers/atlantic_camtrap.zip",
+    exdir = "../01_input/data_papers"
     )
 ```
 
@@ -37,13 +37,13 @@ unzip(
 
 ```{r}
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
-              destfile = "data/data_papers/atlantic_large_mammals.zip",
+              destfile = "../01_input/data_papers/atlantic_large_mammals.zip",
               mode = "wb"
               )
 
 unzip(
-    zipfile = "data/data_papers/atlantic_large_mammals.zip",
-    exdir = "data/data_papers"
+    zipfile = "../01_input/data_papers/atlantic_large_mammals.zip",
+    exdir = "../01_input/data_papers"
     )
 ```
 
@@ -51,12 +51,12 @@ unzip(
 
 ```{r}
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
-              destfile = "data/data_papers/neotropical_carnivores.zip",
+              destfile = "../01_input/data_papers/neotropical_carnivores.zip",
               mode = "wb"
               )
 
 unzip(
-    zipfile = "data/data_papers/neotropical_carnivores.zip",
-    exdir = "data/data_papers"
+    zipfile = "../01_input/data_papers/neotropical_carnivores.zip",
+    exdir = "../01_input/data_papers"
     )
 ```
