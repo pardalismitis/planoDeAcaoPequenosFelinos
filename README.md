@@ -10,12 +10,12 @@ Centralizar documentos, códigos, bases de dados georreferenciadas, análises e 
 
 | Nome científico          | Nome popular              | Categoria de ameaça (MMA 2022) |
 |--------------------------|---------------------------|--------------------------------|
-| Herpailurus yagouaroundi | jaguarundi / gato-mourisco| VU (Vulnerável)               |
-| Leopardus colocola       | gato-palheiro             | VU (Vulnerável)               |
-| Leopardus geoffroyi      | gato-do-mato-grande       | VU (Vulnerável)               |
-| Leopardus guttulus       | gato-do-mato              | VU (Vulnerável)               |
-| Leopardus pardalis       | jaguatirica               | VU (Vulnerável)               |
-| Leopardus wiedii         | gato-maracajá             | VU (Vulnerável)          |
+| Herpailurus yagouaroundi | jaguarundi / gato-mourisco| VU (Vulnerável)                |
+| Leopardus colocola       | gato-palheiro             | VU (Vulnerável)                |
+| Leopardus geoffroyi      | gato-do-mato-grande       | VU (Vulnerável)                |
+| Leopardus guttulus       | gato-do-mato-do-sul       | VU (Vulnerável)                |
+| Leopardus wiedii         | gato-maracajá             | VU (Vulnerável)                |
+| Leopardus tigrinus       | gato-do-mato              | EN (Ameaçado)                  |
 
 ## 📁 Estrutura do Repositório
 
