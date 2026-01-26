@@ -19,17 +19,6 @@ Centralizar documentos, códigos, bases de dados georreferenciadas, análises e 
 
 ## 📁 Estrutura do Repositório
 
-├───01_dadosDeEntrada
-├───02_script
-│   ├───01_limpezaDeDados
-│   ├───02_dataPrepLPI
-│   ├───03_calculoDeLPI
-│   │   └───lpi_temp
-│   └───funcoes
-└───03_dadosDeSaida
-    ├───dados
-    └───plots
-
 ``` bash
 planoDeAcaoPequenosFelinos/
 ├──📄 README.md                  ← Você está aqui
@@ -75,7 +64,7 @@ Você pode copiar, distribuir, exibir, executar, modificar e criar obras derivad
 
 ## 📫 Contato & Coordenação
 
-- **Mantenedor principal**: [Fernando Lima / @pardalismitis]
+- **Mantenedor principal**: Fernando Lima / @pardalismitis
 - **Grupo de trabalho oficial**: PAN Pequenos Felinos – ICMBio / CENAP
 - E-mail institucional sugerido: (se houver grupo de e-mail ou lista)
 
