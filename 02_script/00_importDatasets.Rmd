@@ -16,19 +16,21 @@ Importação de dados (se necessário)
 ```{r pacotes, message=FALSE, warning=FALSE}
 rm(list = ls(all = TRUE))
 source("funcoes/pacotes.R")
-pacotes("here", "tidyverse", "httr")
+pacotes("here", "tidyverse", "httr") #suppdata para burlar captcha mas precisa de instalar RTools
 ```
 
 ### ATLANTIC CAMTRAPS
 
 ```{r}
+# uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
+
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
-              destfile = "../01_input/data_papers/atlantic_camtrap.zip",
+              destfile = "../01_input/data_papers/atlantic_camtraps.zip",
               mode = "wb"
               )
 
 unzip(
-    zipfile = "../01_input/data_papers/atlantic_camtrap.zip",
+    zipfile = "../01_input/data_papers/atlantic_camtraps.zip",
     exdir = "../01_input/data_papers"
     )
 ```
@@ -36,6 +38,7 @@ unzip(
 ### ATLANTIC LARGE MAMMALS
 
 ```{r}
+# uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
               destfile = "../01_input/data_papers/atlantic_large_mammals.zip",
               mode = "wb"
@@ -50,6 +53,7 @@ unzip(
 ### NEOTROPICAL CARNIVORES
 
 ```{r}
+# uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
               destfile = "../01_input/data_papers/neotropical_carnivores.zip",
               mode = "wb"
