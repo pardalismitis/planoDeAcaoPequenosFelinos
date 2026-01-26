@@ -329,3 +329,10 @@ salve_wiedii <- readr::read_csv(
 
 ```
 
+```{r}
+salve_guttulus <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-16-58-04-1146751312_lguttulus.csv"
+    )
+
+```
+
