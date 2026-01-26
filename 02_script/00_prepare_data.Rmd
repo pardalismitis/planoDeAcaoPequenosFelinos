@@ -19,7 +19,7 @@ sf::sf_use_s2(FALSE)
 ```{r}
 # import sites
 ca_si <- readr::read_csv(
-    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv"
+    "../01_input/data_papers/ATLANTIC_CAMTRAPS_1-0_LOCATION.csv"
     ) %>%
     # select only id and coordinates
     dplyr::select(
@@ -32,7 +32,7 @@ ca_si <- readr::read_csv(
 ```{r}
 # import sites names
 ca_si_na <- readr::read_csv(
-    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv"
+    "../01_input/data_papers/ATLANTIC_CAMTRAPS_1-0_SURVEY.csv"
     ) %>%
     # join sites names with coordinates
     dplyr::left_join(
@@ -47,10 +47,11 @@ ca_si_na <- readr::read_csv(
 ca_si_na
 ```
 
+### Import study
 ```{r}
 # import study
 ca_st_na <- readr::read_csv(
-    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_STUDY.csv"
+    "../01_input/data_papers/ATLANTIC_CAMTRAPS_1-0_STUDY.csv"
     ) %>% 
     dplyr::left_join(
         ., ca_si_na, by = "study_id"
@@ -66,7 +67,7 @@ ca_st_na
 ```{r}
 # import species names
 ca_sp_na <- readr::read_csv(
-    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv"
+    "../01_input/data_papers/ATLANTIC_CAMTRAPS_1-0_SPECIES.csv"
     ) %>%
     # remove unnecessary columns
     dplyr::select(
@@ -80,7 +81,7 @@ ca_sp_na <- readr::read_csv(
 ```{r}
 # import records
 ca_sp <- readr::read_csv(
-    "data/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv"
+    "../01_input/data_papers/ATLANTIC_CAMTRAPS_1-0_RECORDS.csv"
     ) %>% 
     # remove unnecessary columns
     dplyr::select(
@@ -146,7 +147,7 @@ readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 ```{r}
 # import data
 tirelli2021_occ <- readr::read_csv2(
-    "data/data_real_MunoasPampasCat.csv"
+    "../01_input/data_real_MunoasPampasCat.csv"
     ) %>%
   dplyr::mutate(
     species = "Leopardus munoai",
@@ -158,14 +159,13 @@ tirelli2021_occ <- readr::read_csv2(
 
 ```
 
-
 ## Atlantic Large Mammals
 
 ### Importar dados
 ```{r}
 # import data
 lm_occ <- readr::read_csv(
-    "data/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"
+    "../01_input/data_papers/ATLANTIC_MAMMAL_MID_LARGE _assemblages_and_sites.csv"
     ) %>% 
     dplyr::mutate(
         genus = str_split(Actual_species_Name, " ", simplify = TRUE)[, 1],
@@ -221,7 +221,7 @@ readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
 ### Importar dados
 ```{r}
 # import
-neo_car_occ <- readr::read_csv("data/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv")
+neo_car_occ <- readr::read_csv("../01_input/data_papers/NEOTROPICAL_CARNIVORES_DATASET_2020-04.csv")
 ```
 
 ### Filtrar registros duvidosos
@@ -290,9 +290,9 @@ readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
 # remove columns that only contain NA values
 not_all_na <- function(x) any(!is.na(x))
 
-gbif_lp <- readr::read_csv(
-    "data/GBIF_leopardus.csv"
-    ) #%>%
+gbif_lp <- readr::read_tsv(
+    "../01_input/GBIF_leopardus.csv"
+    ) %>%
     # filter data without coordinates
     dplyr::filter(
         !is.na(decimalLatitude)
@@ -300,12 +300,8 @@ gbif_lp <- readr::read_csv(
     dplyr::filter(
         !is.na(decimalLongitude)
     ) %>%
-    # filter data from Brazil
     dplyr::filter(
-        country == "Brasil" | country == "Brazil"
-    ) %>%
-    dplyr::filter(
-         year > 1999 & basisOfRecord == "Occurrence"
+         year > 1999 & basisOfRecord == "OCCURRENCE"
     ) %>%
     dplyr::mutate(
         species = scientificName,
@@ -323,3 +319,13 @@ gbif_lp <- readr::read_csv(
         family, genus, species, longitude, latitude, year, source, study
     )
 ```
+
+salve-exportacao-ocorrencias-26-01-2026-10-33-30-181502271_lwiedii.csv
+
+```{r}
+salve_wiedii <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-10-33-30-181502271_lwiedii.csv"
+    )
+
+```
+
