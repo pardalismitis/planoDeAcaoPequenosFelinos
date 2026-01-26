@@ -1,1 +1,90 @@
-# planoDeAcaoPequenosFelinos
+# Plano de Ação Nacional para Conservação dos Pequenos Felinos (PAN Pequenos Felinos)
+
+Repositório dedicado à organização, análise, monitoramento e disseminação de dados e produtos relacionados ao **2º Ciclo do Plano de Ação Nacional para Conservação dos Pequenos Felinos** (PAN Pequenos Felinos), coordenado pelo **ICMBio**.
+
+## 🎯 Objetivo do Repositório
+
+Centralizar documentos, códigos, bases de dados georreferenciadas, análises e materiais de suporte técnico para implementação, monitoramento e avaliação do PAN Pequenos Felinos (vigência 2022–2027, Portaria ICMBio nº 493/2022).
+
+## Espécies contempladas (2º ciclo)
+
+| Nome científico          | Nome popular              | Categoria de ameaça (MMA 2022) |
+|--------------------------|---------------------------|--------------------------------|
+| Herpailurus yagouaroundi | jaguarundi / gato-mourisco| VU (Vulnerável)               |
+| Leopardus colocola       | gato-palheiro             | VU (Vulnerável)               |
+| Leopardus geoffroyi      | gato-do-mato-grande       | VU (Vulnerável)               |
+| Leopardus guttulus       | gato-do-mato              | VU (Vulnerável)               |
+| Leopardus pardalis       | jaguatirica               | VU (Vulnerável)               |
+| Leopardus wiedii         | gato-maracajá             | VU (Vulnerável)          |
+
+## 📁 Estrutura do Repositório
+
+├───01_dadosDeEntrada
+├───02_script
+│   ├───01_limpezaDeDados
+│   ├───02_dataPrepLPI
+│   ├───03_calculoDeLPI
+│   │   └───lpi_temp
+│   └───funcoes
+└───03_dadosDeSaida
+    ├───dados
+    └───plots
+
+``` bash
+planoDeAcaoPequenosFelinos/
+├──📄 README.md                  ← Você está aqui
+├──📄 LICENSE                    ← Sugestão: CC-BY-4.0 ou CC-BY-SA-4.0
+├──📄 CITATION.cff               ← Arquivo de citação recomendada (opcional)
+│
+├── /documentos/                  ← Portarias, matriz de planejamento, atas, relatórios oficiais
+│   ├── PAN_Pequenos_Felinos_Portaria_493_2022.pdf
+│   └── Matriz_Planejamento_...
+│
+├── /dados/                       ← Bases de dados (ocorrências, shapefiles, etc.)
+│   ├── /ocorrencias/             ← Registros limpos (GBIF, SiBBr, etc.)
+│   └── /areas_prioritarias/      ← Mapas e polígonos
+│
+├── /analises/                    ← Scripts de modelagem, gráficos, indicadores
+│   ├── R/
+│   ├── python/
+│   └── notebooks/
+│
+├── /mapas_e_visualizacoes/       ← Figuras, mapas finais, painéis
+│
+├── /produtos/                    ← Relatórios gerados, sumários executivos, infográficos
+│
+└── /referencias/                 ← Artigos científicos, teses, links úteis
+```
+## 🚀 Como contribuir
+
+1. Faça um **fork** do repositório
+2. Crie uma **branch** para sua feature (`git checkout -b feature/nova-analise`)
+3. Commit suas mudanças (`git commit -m 'Adiciona script de modelagem MaxEnt'`)
+4. Faça push para a branch (`git push origin feature/nova-analise`)
+5. Abra um **Pull Request**
+
+Toda contribuição é bem-vinda: dados limpos, códigos de análise (R, Python), revisão de documentos, criação de mapas, sugestões de indicadores de monitoramento, etc.
+
+**Importante**: Respeite as restrições de sensibilidade de dados de ocorrência de espécies ameaçadas (generalize coordenadas quando necessário).
+
+## 📜 Licença
+
+[Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.pt)
+
+Você pode copiar, distribuir, exibir, executar, modificar e criar obras derivadas desde que dê crédito ao repositório e autores originais.
+
+## 📫 Contato & Coordenação
+
+- **Mantenedor principal**: [Fernando Lima / @pardalismitis]
+- **Grupo de trabalho oficial**: PAN Pequenos Felinos – ICMBio / CENAP
+- E-mail institucional sugerido: (se houver grupo de e-mail ou lista)
+
+## Referências principais
+
+- [Página oficial do PAN Pequenos Felinos – ICMBio](https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade/pan/pan-pequenos-felinos)
+- Portaria ICMBio nº 493, de 21 de junho de 2022
+- Matriz de Planejamento do 2º Ciclo (disponível no site do ICMBio)
+
+---
+
+✨ *Ajude a conservar os pequenos felinos do Brasil — cada dado, mapa e análise contam!* 🐱🐾
