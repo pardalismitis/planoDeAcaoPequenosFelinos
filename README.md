@@ -26,18 +26,21 @@ planoDeAcaoPequenosFelinos/
 ├──📄 LICENSE                    ← Sugestão: CC-BY-4.0 ou CC-BY-SA-4.0
 ├──📄 CITATION.cff               ← Arquivo de citação recomendada (opcional)
 │
-├── /documentos/                  ← Portarias, matriz de planejamento, atas, relatórios oficiais
+├── /documentos/                 ← Portarias, matriz de planejamento, atas, relatórios oficiais
 │   ├── PAN_Pequenos_Felinos_Portaria_493_2022.pdf
 │   └── Matriz_Planejamento_...
 │
-├── /dados/                       ← Bases de dados (ocorrências, shapefiles, etc.)
-│   ├── /ocorrencias/             ← Registros limpos (GBIF, SiBBr, etc.)
-│   └── /areas_prioritarias/      ← Mapas e polígonos
+├── /01_input/                       ← Bases de dados (ocorrências, shapefiles, etc.)
+│   ├── /data_papers/             ← Registros brutos (Atlantic Series, Neotropical Series)
+│   ├── /global/             ← Registros burtos (SALVE, GBIF, SiBBr, etc.)
+│   └── /geodata/                 ← Mapas e polígonos
 │
-├── /analises/                    ← Scripts de modelagem, gráficos, indicadores
-│   ├── R/
-│   ├── python/
-│   └── notebooks/
+├── /02_script/                    ← Scripts de limpeza, triagem e integração
+│   ├── data/
+│   ├── funcoes/
+│   ├── notebooks/
+│   ├── 00_importDatasets.Rmd
+│   ├── 01_prepareDatasets.Rmd
 │
 ├── /mapas_e_visualizacoes/       ← Figuras, mapas finais, painéis
 │
