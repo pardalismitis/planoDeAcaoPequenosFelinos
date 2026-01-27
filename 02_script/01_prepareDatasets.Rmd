@@ -155,7 +155,7 @@ ca_occ <- ca_sp %>%
 
 ```{r}
 # export data
-readr::write_csv(ca_occ, "../01_input/atlantic_camtrap.csv")
+readr::write_csv(ca_occ, "data/atlantic_camtrap.csv")
 ```
 
 ### ATLANTIC LARGE MAMMALS
@@ -213,7 +213,7 @@ sort(unique(lm_occ$Observation ))
 #### Exportar
 ```{r}
 # export data
-readr::write_csv(lm_occ, "../01_input/atlantic_large_mammals.csv")
+readr::write_csv(lm_occ, "data/atlantic_large_mammals.csv")
 ```
 
 ### NEOTROPICAL CARNIVORES
@@ -283,9 +283,46 @@ neo_car_occ <- neo_car_occ %>%
 #### Exportar
 ```{r}
 # export data
-readr::write_csv(neo_car_occ, "../01_input/neotropical_carnivores.csv")
+readr::write_csv(neo_car_occ, "data/neotropical_carnivores.csv")
 
 ```
+
+## Tirelli et al. 2021
+
+### Importar dados
+```{r}
+# import data
+tirelli2021_occ <- readr::read_csv2(
+    "../01_input/data_real_MunoasPampasCat.csv"
+    ) %>%
+  dplyr::mutate(
+    species = "Leopardus munoai",
+    genus = "Leopardus",
+    family = "Felidae",
+    order = "Carnivora",
+    source = "tirelli2021",
+    longitude = Long,
+    latitude = Lat,
+    year = Year,
+    study = `Source/ Colectors`,
+    Observation = Sample,
+    SCALP = "C1"
+    ) %>% 
+  dplyr::relocate(
+    order:family:genus:species,
+    .before = 2,
+    ) %>%
+  dplyr::filter(
+    !is.na(longitude)
+    ) %>%
+  dplyr::select(
+    order, family, genus, species, longitude, latitude, year, source, Observation, SCALP, study
+    ) %>%
+  tibble::rowid_to_column(
+    )
+
+```
+
 
 ### GBIF
 
@@ -322,4 +359,48 @@ gbif_lp <- read.csv(
     )
     
 gbif_lp <- gbif_lp[grepl("Leopardus ", gbif_lp$species),]
+```
+
+### SALVE
+
+```{r}
+salve_wiedii <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-10-33-30-181502271_lwiedii.csv"
+    )
+
+salve_guttulus <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-16-58-04-1146751312_lguttulus.csv"
+    )
+
+salve_tigrinus <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-17-02-13-493901872_ltigrinus.csv"
+    )
+
+salve_munoai <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-17-04-20-1768857575_lmunoai.csv"
+    )
+
+salve_geoffroyi <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-17-16-22-1563462613_lgeoffroyi.csv"
+    )
+
+salve_yagouaroundi <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-26-01-2026-17-18-37-109021950_hyagouaroundi.csv"
+    )
+
+salve_braccatus <- readr::read_csv(
+    "../01_input/salve-exportacao-ocorrencias-27-01-2026-11-22-10-1331237110_lbraccatus.csv"
+    )
+
+salvePAN <- dplyr::bind_rows(
+  salve_braccatus,
+  salve_geoffroyi,
+  salve_guttulus,
+  salve_munoai,
+  salve_tigrinus,
+  salve_wiedii,
+  salve_yagouaroundi
+)
+
+
 ```
