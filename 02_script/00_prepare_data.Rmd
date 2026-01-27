@@ -152,10 +152,28 @@ tirelli2021_occ <- readr::read_csv2(
   dplyr::mutate(
     species = "Leopardus munoai",
     genus = "Leopardus",
+    family = "Felidae",
+    order = "Carnivora",
+    source = "tirelli2021",
     longitude = Long,
-    latitude = Lat
-  )
-      
+    latitude = Lat,
+    year = Year,
+    study = `Source/ Colectors`,
+    Observation = Sample,
+    SCALP = "C1"
+    ) %>% 
+  dplyr::relocate(
+    order:family:genus:species,
+    .before = 2,
+    ) %>%
+  dplyr::filter(
+    !is.na(longitude)
+    ) %>%
+  dplyr::select(
+    order, family, genus, species, longitude, latitude, year, source, Observation, SCALP, study
+    ) %>%
+  tibble::rowid_to_column(
+    )
 
 ```
 
