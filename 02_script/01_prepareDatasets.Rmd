@@ -303,7 +303,7 @@ tirelli2021_occ <- readr::read_csv2(
     source = "tirelli2021",
     longitude = Long,
     latitude = Lat,
-    year = Year,
+    year = as.numeric(Year),
     study = `Source/ Colectors`,
     Observation = Sample,
     SCALP = "C1"
