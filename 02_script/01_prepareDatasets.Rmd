@@ -323,6 +323,13 @@ tirelli2021_occ <- readr::read_csv2(
 
 ```
 
+#### Exportar
+```{r}
+# export data
+readr::write_csv(tirelli2021_occ, "data/tirelli2021.csv")
+
+```
+
 
 ### GBIF
 
@@ -400,7 +407,33 @@ salvePAN <- dplyr::bind_rows(
   salve_tigrinus,
   salve_wiedii,
   salve_yagouaroundi
-)
+) %>%
+  dplyr::mutate(
+    source = "SALVE_202601",
+    longitude = Longitude,
+    latitude = Latitude,
+    year = Ano,
+    study = Referencia_bibliografica,
+    Observation = Tipo_registro,
+    SCALP = "C1",
+    order = Ordem,
+    family = Familia,
+    genus = Genero,
+    species = Especie
+    ) %>%
+  dplyr::select(
+    order, family, genus, species, longitude, latitude, year, source, Observation, SCALP, study
+    ) %>%
+  tibble::rowid_to_column(
+    )
 
+
+
+```
+
+#### Exportar
+```{r}
+# export data
+readr::write_csv(salvePAN, "data/salvepanpf.csv")
 
 ```
