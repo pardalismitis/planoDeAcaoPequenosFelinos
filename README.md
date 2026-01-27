@@ -29,7 +29,7 @@ planoDeAcaoPequenosFelinos/
 ├── /01_input/                   ← Bases de dados (ocorrências, shapefiles, etc.)
 │   ├── /data_papers/                ← Registros brutos (Atlantic Series, Neotropical Series)
 │   ├── /global/                     ← Registros burtos (SALVE, GBIF, SiBBr, etc.)
-│   └── /geodata/                    ← Mapas e polígonos
+│   └── /geodata/                    ← Mapas e polígonos de referência
 │
 ├── /02_script/                  ← Scripts de limpeza, triagem e integração
 │   ├── data/
