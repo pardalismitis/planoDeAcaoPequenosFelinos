@@ -338,7 +338,6 @@ gbif_lp <- readr::read_tsv(
     )
 ```
 
-salve-exportacao-ocorrencias-26-01-2026-10-33-30-181502271_lwiedii.csv
 
 ```{r}
 salve_wiedii <- readr::read_csv(
