@@ -7,11 +7,13 @@ output:
   pdf_document:
 ---
 
-Importação de dados (se necessário)
-
 ## PREPARAÇÃO
 
+Importação de dados (se necessário). Caso já tenha passado por esta etapa e não houve atualização nos arquivos vá para a próxima etapa.
+
 ### PACOTES
+
+O script abaixo usa uma função para identificar se os pacotes necessários já estão instalados e os chama ou se é necessário a instalação.
 
 ```{r pacotes, message=FALSE, warning=FALSE}
 rm(list = ls(all = TRUE))
@@ -20,6 +22,10 @@ pacotes("here", "tidyverse", "httr") #suppdata para burlar captcha mas precisa d
 ```
 
 ### ATLANTIC CAMTRAPS
+
+Dataset de dados registros de ocorrência de mamíferos de médio e grande porte da Mata Atlântica a partir de dados de armadilhas fotográficas:
+
+Lima, F., et al. (2017), ATLANTIC-CAMTRAPS: a dataset of medium and large terrestrial mammal communities in the Atlantic Forest of South America. Ecology, 98: 2979-2979. https://doi.org/10.1002/ecy.1998
 
 ```{r}
 # uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
@@ -36,6 +42,10 @@ unzip(
 ```
 
 ### ATLANTIC LARGE MAMMALS
+
+Dataset de dados registros de ocorrência de mamíferos de médio e grande porte da Mata Atlântica a partir de dados de armadilhas fotográficas:
+
+Souza Y., et al. 2019. ATLANTIC MAMMALS: a data set of assemblages of medium- and large-sized mammals of the Atlantic Forest of South America. Ecology 100(10):e02785. 10.1002/ecy.2785
 
 ```{r}
 # uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
