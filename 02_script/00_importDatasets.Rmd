@@ -62,6 +62,8 @@ unzip(
 
 ### NEOTROPICAL CARNIVORES
 
+
+
 ```{r}
 # uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
 download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
