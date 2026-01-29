@@ -75,5 +75,3 @@ Você pode copiar, distribuir, exibir, executar, modificar e criar obras derivad
 -   Matriz de Planejamento do 2º Ciclo (disponível no site do ICMBio)
 
 ------------------------------------------------------------------------
-
-✨ *Ajude a conservar os pequenos felinos do Brasil — cada dado, mapa e análise contam!* 🐱🐾
