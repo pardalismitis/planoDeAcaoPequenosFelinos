@@ -30,10 +30,10 @@ Lima, F., et al. (2017), ATLANTIC-CAMTRAPS: a dataset of medium and large terres
 ```{r}
 # uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
 
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
-              destfile = "../01_input/data_papers/atlantic_camtraps.zip",
-              mode = "wb"
-              )
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.1998&file=ecy1998-sup-0001-DataS1.zip",
+#              destfile = "../01_input/data_papers/atlantic_camtraps.zip",
+ #             mode = "wb"
+  #            )
 
 unzip(
     zipfile = "../01_input/data_papers/atlantic_camtraps.zip",
@@ -49,10 +49,10 @@ Souza Y., et al. 2019. ATLANTIC MAMMALS: a data set of assemblages of medium- an
 
 ```{r}
 # uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
-              destfile = "../01_input/data_papers/atlantic_large_mammals.zip",
-              mode = "wb"
-              )
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2785&file=ecy2785-sup-0001-DataS1.zip",
+ #             destfile = "../01_input/data_papers/atlantic_large_mammals.zip",
+  #            mode = "wb"
+   #           )
 
 unzip(
     zipfile = "../01_input/data_papers/atlantic_large_mammals.zip",
@@ -66,10 +66,10 @@ unzip(
 
 ```{r}
 # uma atualização da plataforma adicionou uma barreira contra automação de download. Se houver erro copiar o link e baixar o arquivo manualmente.
-download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
-              destfile = "../01_input/data_papers/neotropical_carnivores.zip",
-              mode = "wb"
-              )
+#download.file(url = "https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.3128&file=ecy3128-sup-0001-DataS1.zip",
+ #             destfile = "../01_input/data_papers/neotropical_carnivores.zip",
+  #            mode = "wb"
+   #           )
 
 unzip(
     zipfile = "../01_input/data_papers/neotropical_carnivores.zip",
