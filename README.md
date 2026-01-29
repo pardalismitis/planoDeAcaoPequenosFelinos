@@ -23,26 +23,26 @@ Centralizar documentos, códigos, bases de dados georreferenciadas, análises e 
 
 ``` bash
 planoDeAcaoPequenosFelinos/
-├──📄 README.md                         ← Você está aqui
-├──📄 LICENSE                           ← Sugestão: CC-BY-4.0 ou CC-BY-SA-4.0
-├──📄 CITATION.cff                      ← Arquivo de citação recomendada (opcional)
-├── planoDeAcaoPequenosFelinos.Rproj
+├──📄 README.md                       ← Você está aqui
+├──📄 LICENSE                         ← Sugestão: CC-BY-4.0 ou CC-BY-SA-4.0
+├──📄 CITATION.cff                    ← Arquivo de citação recomendada (opcional)
+├── planoDeAcaoPequenosFelinos.Rproj  ← Arquivo de projeto do R Studio
 │
-├── /01_input/                          ← Bases de dados (ocorrências, shapefiles, etc.)
-│   ├── /data_papers/                       ← Registros brutos (Atlantic Series, Neotropical Series)
-│   ├── /geodata/                           ← Mapas e polígonos de referência
-│   └── /global/                            ← Registros brutos (SALVE, GBIF, SiBBr, etc.)
+├── /01_input/                        ← Bases de dados (ocorrências, shapefiles, etc.)
+│   ├── /data_papers/                     ← Registros brutos (Atlantic Series, Neotropical Series)
+│   ├── /geodata/                         ← Mapas e polígonos de referência
+│   └── /global/                          ← Registros brutos (SALVE, GBIF, SiBBr, etc.)
 │
-├── /02_script/                         ← Scripts de limpeza, triagem e integração
-│   ├── funcoes/                            ← Pasta de funções a serem utilizadas
-│   ├── 00_importDatasets.Rmd               ← Script de importação de bases online
-│   ├── 01_prepareDatasets.Rmd              ← Script de triagem e integração
-│   └── 02_cleanDatasets.Rmd                ← Scripts de limpeza
+├── /02_script/                       ← Scripts de limpeza, triagem e integração
+│   ├── funcoes/                          ← Pasta de funções a serem utilizadas
+│   ├── 00_importDatasets.Rmd             ← Script de importação de bases online
+│   ├── 01_prepareDatasets.Rmd            ← Script de triagem e integração
+│   └── 02_cleanDatasets.Rmd              ← Scripts de limpeza
 │
-└── /03_output/                         ← Dados triados, figuras e mapas
-    ├── /data/                              ← Dados triados para plotagem e análise
-    ├── /figuras/                           ← Figuras e gráficos de saídalimpeza, triagem e integração
-    └── /mapas/                             ← Mapas e polígonos de saída
+└── /03_output/                       ← Dados triados, figuras e mapas
+    ├── /data/                            ← Dados triados para plotagem e análise
+    ├── /figuras/                         ← Figuras e gráficos de saídalimpeza, triagem e integração
+    └── /mapas/                           ← Mapas e polígonos de saída
 ```
 ## 🚀 Como contribuir
 
