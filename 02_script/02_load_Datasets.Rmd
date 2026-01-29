@@ -4,6 +4,11 @@ output: html_notebook
 ---
 
 ```{r}
+library(tidyverse)
+```
+
+
+```{r}
 # carregar dados do Atlantic Large Mammals
 at_lar <- readr::read_csv("data/atlantic_large_mammals.csv")
 at_lar
@@ -173,8 +178,19 @@ unique(sort(gatosBrasil$order))
 gatosBrasil <- gatosBrasil %>%
   filter(year>1999)
 
+gatosBrasil %>%
+  count(species)
 
 ```
+
+```{r}
+for (sp in unique(gatosBrasil$species)) {
+  gatosBrasil %>%
+    filter(species == sp) %>%
+    write_csv(paste0("data/gatosBrasil_", sp, ".csv"))
+}
+```
+
 
 ```{r}
 # export data
