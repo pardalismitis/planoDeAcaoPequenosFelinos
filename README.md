@@ -66,7 +66,7 @@ Você pode copiar, distribuir, exibir, executar, modificar e criar obras derivad
 
 -   **Mantenedor principal**: Fernando Lima / @pardalismitis
 -   **Grupo de trabalho oficial**: PAN Pequenos Felinos – ICMBio / CENAP
--   E-mail institucional sugerido: (se houver grupo de e-mail ou lista)
+-   E-mail institucional:
 
 ## Referências principais
 
