@@ -48,7 +48,7 @@ planoDeAcaoPequenosFelinos/
 
 1.  Faça um **fork** do repositório
 2.  Crie uma **branch** para sua feature (`git checkout -b feature/nova-analise`)
-3.  Commit suas mudanças (`git commit -m 'Adiciona script de modelagem MaxEnt'`)
+3.  Commit suas mudanças (`git commit -m 'Por exemplo: Adiciona script de modelagem blábláblá'`)
 4.  Faça push para a branch (`git push origin feature/nova-analise`)
 5.  Abra um **Pull Request**
 
