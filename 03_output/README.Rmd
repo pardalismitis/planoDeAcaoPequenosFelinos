@@ -3,3 +3,46 @@ title: "README"
 output: html_document
 ---
 
+Esta pasta é destinada ao armazenamento de dados associados a artigos científicos, relatórios técnicos e outros produtos analíticos desenvolvidos no âmbito deste repositório.
+
+Por que a pasta está vazia?
+
+Os dados não estão versionados publicamente neste repositório por razões que podem incluir, mas não se limitam a:
+
+Sensibilidade ambiental (ex.: localização de espécies ameaçadas)
+
+Restrições legais ou institucionais
+
+Acordos de confidencialidade com órgãos gestores
+
+Dados ainda em processo de curadoria ou validação
+
+Ou seja: a ausência de arquivos aqui é intencional, não um erro.
+
+Como acessar os dados
+
+Os dados utilizados nos trabalhos podem ser solicitados diretamente aos gestores responsáveis, conforme as regras de uso, compartilhamento e autorização aplicáveis a cada conjunto de dados.
+
+Recomenda-se que o solicitante informe claramente:
+
+O objetivo do uso dos dados
+
+O produto pretendido (artigo, relatório, análise exploratória etc.)
+
+A instituição ou vínculo profissional
+
+Reprodutibilidade
+
+Mesmo com os dados não públicos, este repositório busca garantir transparência metodológica.
+Scripts, fluxos de trabalho e descrições analíticas são disponibilizados para permitir:
+
+Auditoria dos métodos
+
+Reprodutibilidade condicionada ao acesso aos dados
+
+Reuso responsável da metodologia
+
+Observação importante
+
+Nem todo dado científico deve ser aberto indiscriminadamente.
+Transparência não é sinônimo de exposição irrestrita, especialmente em contextos de conservação da biodiversidade.
