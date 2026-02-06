@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # Plano de Ação Nacional para Conservação dos Pequenos Felinos (PAN Pequenos Felinos)
 
 Repositório dedicado à organização, análise, monitoramento e disseminação de dados e produtos relacionados ao **2º Ciclo do Plano de Ação Nacional para Conservação dos Pequenos Felinos** [(PAN Pequenos Felinos)](https://www.gov.br/icmbio/pt-br/assuntos/biodiversidade/pan/pan-pequenos-felinos), coordenado pelo **ICMBio**.
